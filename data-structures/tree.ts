@@ -14,11 +14,11 @@ class TreeNode<T> {
 
 export class Tree<T> {
   nextId: number;
-  root: TreeNode<T>;
+  root: TreeNode<T> | null;
 
-  constructor(data: T) {
+  constructor() {
     this.nextId = 0;
-    this.root = new TreeNode(this.nextId, null, data);
+    this.root = null;
   }
 
   isEmpty(): boolean {
@@ -45,7 +45,14 @@ export class Tree<T> {
     }
   }
 
-  addNodeTo(data: T, id: number): void {
+  replaceRoot(data: T): TreeNode<T> {
+    this.nextId = 0;
+    this.root = new TreeNode(this.nextId, null, data);
+    this.nextId += 1;
+    return this.root;
+  }
+
+  addNodeTo(data: T, id: number): TreeNode<T> {
     const parent = this.findNode(id);
 
     if (!parent) {
@@ -56,6 +63,7 @@ export class Tree<T> {
     this.nextId += 1;
 
     parent.children.push(newNode);
+    return newNode;
   }
 
   removeNode(id: number): void {
@@ -72,11 +80,15 @@ export class Tree<T> {
     parent.children = parent.children.filter(child => child.id !== nodeToRemove.id);
   }
 
-  deepCopy(): TreeNode<T> {
-    const queue = [this.root];
-    const newRoot = new TreeNode(this.nextId, null, this.root.data);
-    const newTree = new Tree(this.root.data);
+  deepCopy(): Tree<T> {
+    if (this.root === null) {
+      return new Tree<T>();
+    }
 
+    const newTree = new Tree<T>();
+    newTree.replaceRoot(this.root.data);
+
+    const queue = [this.root];
     while (queue.length) {
       const node = queue.shift();
 
@@ -90,6 +102,6 @@ export class Tree<T> {
       }
     }
 
-    return newRoot;
+    return newTree;
   }
 }
