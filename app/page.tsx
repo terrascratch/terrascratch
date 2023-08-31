@@ -14,6 +14,7 @@ export default function Home() {
           alt="Infra for babies"
           width={100}
           height={100}
+          priority
         />
 
         <h1 className="text-2xl mt-3">Infra for Babies</h1>
