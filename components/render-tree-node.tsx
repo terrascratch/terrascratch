@@ -45,11 +45,9 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
 
       <div>{mappedElements}</div>
 
-      <div className="flex items-center">
+      <div className={`flex items-center ${hovered ? "block" : "hidden"}`}>
         <button
-          className={`${
-            hovered ? "block" : "hidden"
-          } rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3`}
+          className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3"
           type="button"
           onClick={onAdd}
         >
@@ -57,9 +55,7 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
         </button>
 
         <button
-          className={`${
-            hovered ? "block" : "hidden"
-          } rounded-md bg-zinc-900 p-3 max-w-xs mt-3`}
+          className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3"
           type="button"
           onClick={onDelete}
         >
