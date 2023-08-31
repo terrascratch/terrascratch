@@ -1,4 +1,5 @@
 export interface SecurityGroupRule {
+  name: string;
   sourcePort: number;
   destinationPort: number;
   protocol: string;
@@ -20,6 +21,7 @@ export interface VPC {
 }
 
 export interface Subnet {
+  name: string;
   vpc: VPC;
   cidrBlock: string;
   public: boolean;
@@ -33,3 +35,5 @@ export interface EC2 {
   securityGroups: SecurityGroup[];
   vpc: VPC;
 }
+
+export type InfraElement = VPC | Subnet | EC2 | SecurityGroup | SecurityGroupRule;
