@@ -37,7 +37,7 @@ export function RenderContainer({
         type="button"
         onClick={handleAddElement}
       >
-        Adicionar
+        Add
       </button>
     </div>
   );

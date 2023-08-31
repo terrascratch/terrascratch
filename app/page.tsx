@@ -1,4 +1,4 @@
-import { RenderContainer } from "@/components/infra-element";
+import { RenderContainer } from "@/components/render-container";
 import { initialContainer } from "@/mocks/containers";
 import NextImage from "next/image";
 
