@@ -1,6 +1,16 @@
+import { ShowInfraElement } from "@/components/infra-element";
+import { InfraElement } from "@/infra-elements/types";
 import NextImage from "next/image";
 
 export default function Home() {
+  const initialElement: InfraElement = {
+    name: "teste1",
+    sourcePort: 2,
+    destinationPort: 2,
+    protocol: "string",
+    cidrBlocks: ["string"],
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <header className="flex flex-col items-center justify-center">
@@ -15,7 +25,9 @@ export default function Home() {
       </header>
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
-      <section className="flex flex-1 flex-col items-center justify-center"></section>
+      <section className="flex flex-1 flex-col items-center justify-center">
+        <ShowInfraElement element={initialElement} />
+      </section>
 
       <footer className="text-slate-500 text-sm">
         <a href="https://br.freepik.com/vetores-gratis/logotipo-detalhado-do-bebe_10806892.htm#query=baby%20logo&position=1&from_view=search&track=ais">
