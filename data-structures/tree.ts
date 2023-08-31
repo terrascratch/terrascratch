@@ -44,6 +44,19 @@ export class TreeNode implements ElementContainer {
     parent.children.push(node);
   }
 
+  removeChild(idToRemove: string) {
+    for (let i = 0; i < this.children.length; i++) {
+      if (this.children[i].id === idToRemove) {
+        this.children.splice(i, 1);
+        return;
+      }
+    }
+
+    for (const child of this.children) {
+      child.removeChild(idToRemove);
+    }
+  }
+
   deepCopy(): TreeNode {
     return new TreeNode(this);
   }
