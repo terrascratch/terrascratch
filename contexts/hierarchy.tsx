@@ -1,7 +1,7 @@
+"use client";
 import { TreeNode } from "@/data-structures/tree";
 import { ElementContainer } from "@/infra-elements/types";
 import { createContext, useState, FC, useContext } from "react";
-import uuid from "react-uuid";
 
 export interface HierarchyContextState {
   root: TreeNode;

@@ -1,8 +1,11 @@
+"use client";
 import { RenderTreeNode } from "@/components/render-tree-node";
-import { initialContainer } from "@/mocks/containers";
+import { useHierarchy } from "@/contexts/hierarchy";
 import NextImage from "next/image";
 
 export default function Home() {
+  const hierarchy = useHierarchy();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <header className="flex flex-col items-center justify-center">
@@ -18,7 +21,12 @@ export default function Home() {
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
       <section className="flex flex-1 flex-col items-center justify-center">
-        <RenderTreeNode container={initialContainer} />
+        <RenderTreeNode
+          node={hierarchy.root}
+          onAdd={(newContainer) =>
+            hierarchy.addContainer(hierarchy.root.id, newContainer)
+          }
+        />
       </section>
 
       <footer className="text-slate-500 text-sm">

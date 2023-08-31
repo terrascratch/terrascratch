@@ -2,28 +2,28 @@
 import { useState } from "react";
 import type { ElementContainer } from "@/infra-elements/types";
 import uuid from "react-uuid";
+import { TreeNode } from "@/data-structures/tree";
+import { useHierarchy } from "@/contexts/hierarchy";
 
-interface InfraElementProps {
-  container: ElementContainer;
-  content?: ElementContainer[];
+interface RenderTreeNodeProps {
+  node: TreeNode;
+  onAdd: (newContainer: ElementContainer) => void;
+  onDelete?: () => void;
 }
 
-function mapContent(children: ElementContainer[]) {
-  return children.map((child) => {
-    return <RenderTreeNode key={uuid()} container={child} />;
-  });
-}
-
-export function RenderTreeNode({ container, content = [] }: InfraElementProps) {
-  const mappedElements = mapContent(content);
-
+export function RenderTreeNode({ node, onAdd }: RenderTreeNodeProps) {
+  const hierarchy = useHierarchy();
   const [hovered, setHovered] = useState(false);
-  const [elements, setElements] = useState(mappedElements);
 
-  const handleAddElement = () => {
-    const newElement = <RenderTreeNode key={uuid()} container={container} />;
-    setElements((oldElements) => [...oldElements, newElement]);
-  };
+  const mappedElements = node.children.map((child) => {
+    return (
+      <RenderTreeNode
+        key={child.id}
+        node={child}
+        onAdd={(newContainer) => hierarchy.addContainer(node.id, newContainer)}
+      />
+    );
+  });
 
   return (
     <div
@@ -31,16 +31,28 @@ export function RenderTreeNode({ container, content = [] }: InfraElementProps) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <h1 className="font-bold text-lg">{container.name}</h1>
+      <h1 className="font-bold text-lg">{node.name}</h1>
 
-      <div>{elements}</div>
+      <div>{mappedElements}</div>
 
       <button
         className={`${
           hovered ? "block" : "hidden"
         } rounded-md bg-zinc-900 p-3 max-w-xs mt-3`}
         type="button"
-        onClick={handleAddElement}
+        onClick={() =>
+          onAdd({
+            name: uuid(),
+            element: {
+              name: "Test1",
+              sourcePort: 2,
+              destinationPort: 2,
+              protocol: "string",
+              cidrBlocks: ["string"],
+            },
+            children: [],
+          })
+        }
       >
         Add
       </button>
