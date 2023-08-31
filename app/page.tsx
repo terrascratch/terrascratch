@@ -1,20 +1,8 @@
 import { RenderContainer } from "@/components/infra-element";
-import { ElementContainer } from "@/infra-elements/types";
+import { initialContainer } from "@/mocks/containers";
 import NextImage from "next/image";
 
 export default function Home() {
-  const initialContainer: ElementContainer = {
-    name: "Teste",
-    element: {
-      name: "teste1",
-      sourcePort: 2,
-      destinationPort: 2,
-      protocol: "string",
-      cidrBlocks: ["string"],
-    },
-    children: [],
-  };
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <header className="flex flex-col items-center justify-center">
