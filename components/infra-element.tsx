@@ -4,21 +4,18 @@ import type { InfraElement } from "@/infra-elements/types";
 
 interface InfraElementProps {
   element: InfraElement;
-  children?: InfraElement[];
+  content?: InfraElement[];
 }
 
-function mapChildren(children: InfraElement[]) {
+function mapContent(children: InfraElement[]) {
   return children.map((child) => {
     return <ShowInfraElement key={String(Math.random())} element={child} />;
   });
 }
 
-export function ShowInfraElement({
-  element,
-  children = [],
-}: InfraElementProps) {
-  const mappedChildren = mapChildren(children);
-  const [elements, setElements] = useState(mappedChildren);
+export function ShowInfraElement({ element, content = [] }: InfraElementProps) {
+  const mappedElements = mapContent(content);
+  const [elements, setElements] = useState(mappedElements);
 
   const handleAddElement = () => {
     const newElement = (
