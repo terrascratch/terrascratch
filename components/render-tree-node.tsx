@@ -10,21 +10,18 @@ interface InfraElementProps {
 
 function mapContent(children: ElementContainer[]) {
   return children.map((child) => {
-    return <RenderContainer key={uuid()} container={child} />;
+    return <RenderTreeNode key={uuid()} container={child} />;
   });
 }
 
-export function RenderContainer({
-  container,
-  content = [],
-}: InfraElementProps) {
+export function RenderTreeNode({ container, content = [] }: InfraElementProps) {
   const mappedElements = mapContent(content);
 
   const [hovered, setHovered] = useState(false);
   const [elements, setElements] = useState(mappedElements);
 
   const handleAddElement = () => {
-    const newElement = <RenderContainer key={uuid()} container={container} />;
+    const newElement = <RenderTreeNode key={uuid()} container={container} />;
     setElements((oldElements) => [...oldElements, newElement]);
   };
 

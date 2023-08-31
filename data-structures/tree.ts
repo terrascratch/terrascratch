@@ -1,107 +1,49 @@
-class TreeNode<T> {
-  id: number;
-  data: T;
-  parentId: number | null;
-  children: TreeNode<T>[];
+import { ElementContainer, InfraElement } from "@/infra-elements/types";
+import uuid from "react-uuid";
 
-  constructor(id: number, parentId: number | null, data: T) {
-    this.id = id;
-    this.parentId = parentId;
-    this.children = [];
-    this.data = data;
-  }
-}
+export class TreeNode implements ElementContainer {
+  id: string = uuid();
+  name: string;
+  element: InfraElement;
+  children: TreeNode[] = [];
 
-export class Tree<T> {
-  nextId: number;
-  root: TreeNode<T> | null;
-
-  constructor() {
-    this.nextId = 0;
-    this.root = null;
+  constructor(container: ElementContainer) {
+    this.name = container.name;
+    this.element = container.element;
+    this.addChildren(container.children);
   }
 
-  isEmpty(): boolean {
-    return this.root === null;
+  addChildren(containers: ElementContainer[]) {
+    for (const container of containers) {
+      this.children.push(new TreeNode(container));
+    }
   }
 
-  findNode(id: number): TreeNode<T> | undefined {
-    const queue = [this.root];
-
-    while (queue.length) {
-      const node = queue.shift();
-
-      if (node?.id === id) {
-        return node;
-      }
-
-      if (!node) {
-        continue;
-      }
-
-      for (const child of node.children) {
-        queue.push(child);
+  findNode(id: string): TreeNode | null {
+    if (this.id === id) {
+      return this;
+    }
+    for (const child of this.children) {
+      const found = child.findNode(id);
+      if (found) {
+        return found;
       }
     }
+    return null;
   }
 
-  replaceRoot(data: T): TreeNode<T> {
-    this.nextId = 0;
-    this.root = new TreeNode(this.nextId, null, data);
-    this.nextId += 1;
-    return this.root;
+  addChild(toId: string, container: ElementContainer) {
+    const node = new TreeNode(container);
+    const parent = this.findNode(toId);
+
+    if (parent === null) {
+      throw new Error(`Could not find node with id ${toId}`);
+    }
+
+    parent.children.push(node);
   }
 
-  addNodeTo(data: T, id: number): TreeNode<T> {
-    const parent = this.findNode(id);
-
-    if (!parent) {
-      throw new Error('Cannot add node to non-existent parent.');
-    }
-
-    const newNode = new TreeNode(this.nextId, id, data);
-    this.nextId += 1;
-
-    parent.children.push(newNode);
-    return newNode;
-  }
-
-  removeNode(id: number): void {
-    const nodeToRemove = this.findNode(id);
-    if (!nodeToRemove || !nodeToRemove.parentId) {
-      throw new Error('Cannot remove non-existent node.');
-    }
-
-    const parent = this.findNode(nodeToRemove.parentId);
-    if (!parent) {
-      throw new Error('Cannot remove root node.');
-    }
-
-    parent.children = parent.children.filter(child => child.id !== nodeToRemove.id);
-  }
-
-  deepCopy(): Tree<T> {
-    if (this.root === null) {
-      return new Tree<T>();
-    }
-
-    const newTree = new Tree<T>();
-    newTree.replaceRoot(this.root.data);
-
-    const queue = [this.root];
-    while (queue.length) {
-      const node = queue.shift();
-
-      if (!node) {
-        continue;
-      }
-
-      for (const child of node.children) {
-        queue.push(child);
-        newTree.addNodeTo(child.data, node.id);
-      }
-    }
-
-    return newTree;
+  deepCopy(): TreeNode {
+    return new TreeNode(this);
   }
 }

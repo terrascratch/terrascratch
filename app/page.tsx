@@ -1,4 +1,4 @@
-import { RenderContainer } from "@/components/render-container";
+import { RenderTreeNode } from "@/components/render-tree-node";
 import { initialContainer } from "@/mocks/containers";
 import NextImage from "next/image";
 
@@ -18,7 +18,7 @@ export default function Home() {
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
       <section className="flex flex-1 flex-col items-center justify-center">
-        <RenderContainer container={initialContainer} />
+        <RenderTreeNode container={initialContainer} />
       </section>
 
       <footer className="text-slate-500 text-sm">
