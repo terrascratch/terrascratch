@@ -6,6 +6,7 @@ import { createContext, useState, FC, useContext } from "react";
 export interface HierarchyContextState {
   root: TreeNode;
   addContainer: (toId: string, container: ElementContainer) => void;
+  removeContainer: (id: string) => void;
 }
 
 const defaultElementContainer = {
@@ -23,6 +24,7 @@ const defaultElementContainer = {
 const contextDefaultValues: HierarchyContextState = {
   root: new TreeNode(defaultElementContainer),
   addContainer: () => {},
+  removeContainer: () => {},
 };
 
 export const HierarchyContext =
@@ -37,11 +39,17 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
     setRoot(root.deepCopy());
   };
 
+  const removeContainer = (id: string) => {
+    root.removeChild(id);
+    setRoot(root.deepCopy());
+  };
+
   return (
     <HierarchyContext.Provider
       value={{
         root,
         addContainer,
+        removeContainer,
       }}
     >
       {children}

@@ -7,7 +7,6 @@ import { useHierarchy } from "@/contexts/hierarchy";
 
 interface RenderTreeNodeProps {
   node: TreeNode;
-  onDelete?: () => void;
 }
 
 export function RenderTreeNode({ node }: RenderTreeNodeProps) {
@@ -28,6 +27,10 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
     });
   };
 
+  const onDelete = () => {
+    hierarchy.removeContainer(node.id);
+  };
+
   const mappedElements = node.children.map((child) => {
     return <RenderTreeNode key={child.id} node={child} />;
   });
@@ -42,15 +45,27 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
 
       <div>{mappedElements}</div>
 
-      <button
-        className={`${
-          hovered ? "block" : "hidden"
-        } rounded-md bg-zinc-900 p-3 max-w-xs mt-3`}
-        type="button"
-        onClick={onAdd}
-      >
-        Add
-      </button>
+      <div className="flex items-center">
+        <button
+          className={`${
+            hovered ? "block" : "hidden"
+          } rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3`}
+          type="button"
+          onClick={onAdd}
+        >
+          Add
+        </button>
+
+        <button
+          className={`${
+            hovered ? "block" : "hidden"
+          } rounded-md bg-zinc-900 p-3 max-w-xs mt-3`}
+          type="button"
+          onClick={onDelete}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
