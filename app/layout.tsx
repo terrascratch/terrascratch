@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Infra for Babies",
   description:
-    "Easy-to-use dashboard where you can deploy your infraestruture in the cloud",
+    "Easy-to-use dashboard where you can build your terraform code like playing with lego blocks.",
 };
 
 export default function RootLayout({
