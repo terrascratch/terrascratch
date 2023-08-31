@@ -27,12 +27,16 @@ export function RenderContainer({
   };
 
   return (
-    <div className="my-5 p-3 px-10 border-solid border-2 border-white rounded-md flex flex-col justify-center">
+    <div className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
       <h1 className="font-bold text-lg">{container.name}</h1>
 
       <div>{elements}</div>
 
-      <button type="button" onClick={handleAddElement}>
+      <button
+        className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3"
+        type="button"
+        onClick={handleAddElement}
+      >
         Adicionar
       </button>
     </div>
