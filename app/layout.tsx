@@ -23,9 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <HierarchyProvider>
-        <body className={inter.className}>{children}</body>
-      </HierarchyProvider>
+      <body className={inter.className}>
+        <HierarchyProvider>{children}</HierarchyProvider>
+      </body>
     </html>
   );
 }
