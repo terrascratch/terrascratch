@@ -1,32 +1,35 @@
 "use client";
 import { useState } from "react";
-import type { InfraElement } from "@/infra-elements/types";
+import type { ElementContainer } from "@/infra-elements/types";
 
 interface InfraElementProps {
-  element: InfraElement;
-  content?: InfraElement[];
+  container: ElementContainer;
+  content?: ElementContainer[];
 }
 
-function mapContent(children: InfraElement[]) {
+function mapContent(children: ElementContainer[]) {
   return children.map((child) => {
-    return <ShowInfraElement key={String(Math.random())} element={child} />;
+    return <RenderContainer key={String(Math.random())} container={child} />;
   });
 }
 
-export function ShowInfraElement({ element, content = [] }: InfraElementProps) {
+export function RenderContainer({
+  container,
+  content = [],
+}: InfraElementProps) {
   const mappedElements = mapContent(content);
   const [elements, setElements] = useState(mappedElements);
 
   const handleAddElement = () => {
     const newElement = (
-      <ShowInfraElement key={String(Math.random())} element={element} />
+      <RenderContainer key={String(Math.random())} container={container} />
     );
     setElements((oldElements) => [...oldElements, newElement]);
   };
 
   return (
     <div>
-      <h1>{element.name}</h1>
+      <h1>{container.name}</h1>
 
       {elements}
 

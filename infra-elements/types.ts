@@ -36,4 +36,10 @@ export interface EC2 {
   vpc: VPC;
 }
 
-export type InfraElement = VPC | Subnet | EC2 | SecurityGroup | SecurityGroupRule;
+type InfraElement = VPC | Subnet | EC2 | SecurityGroup | SecurityGroupRule;
+
+export interface ElementContainer {
+  name: string;
+  element: InfraElement;
+  children: ElementContainer[];
+}

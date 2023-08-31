@@ -1,14 +1,18 @@
-import { ShowInfraElement } from "@/components/infra-element";
-import { InfraElement } from "@/infra-elements/types";
+import { RenderContainer } from "@/components/infra-element";
+import { ElementContainer } from "@/infra-elements/types";
 import NextImage from "next/image";
 
 export default function Home() {
-  const initialElement: InfraElement = {
-    name: "teste1",
-    sourcePort: 2,
-    destinationPort: 2,
-    protocol: "string",
-    cidrBlocks: ["string"],
+  const initialContainer: ElementContainer = {
+    name: "Teste",
+    element: {
+      name: "teste1",
+      sourcePort: 2,
+      destinationPort: 2,
+      protocol: "string",
+      cidrBlocks: ["string"],
+    },
+    children: [],
   };
 
   return (
@@ -26,7 +30,7 @@ export default function Home() {
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
       <section className="flex flex-1 flex-col items-center justify-center">
-        <ShowInfraElement element={initialElement} />
+        <RenderContainer container={initialContainer} />
       </section>
 
       <footer className="text-slate-500 text-sm">
