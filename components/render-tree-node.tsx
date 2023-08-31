@@ -7,22 +7,29 @@ import { useHierarchy } from "@/contexts/hierarchy";
 
 interface RenderTreeNodeProps {
   node: TreeNode;
-  onAdd: (newContainer: ElementContainer) => void;
   onDelete?: () => void;
 }
 
-export function RenderTreeNode({ node, onAdd }: RenderTreeNodeProps) {
+export function RenderTreeNode({ node }: RenderTreeNodeProps) {
   const hierarchy = useHierarchy();
   const [hovered, setHovered] = useState(false);
 
+  const onAdd = () => {
+    hierarchy.addContainer(node.id, {
+      name: uuid(),
+      element: {
+        name: "Test1",
+        sourcePort: 2,
+        destinationPort: 2,
+        protocol: "string",
+        cidrBlocks: ["string"],
+      },
+      children: [],
+    });
+  };
+
   const mappedElements = node.children.map((child) => {
-    return (
-      <RenderTreeNode
-        key={child.id}
-        node={child}
-        onAdd={(newContainer) => hierarchy.addContainer(node.id, newContainer)}
-      />
-    );
+    return <RenderTreeNode key={child.id} node={child} />;
   });
 
   return (
@@ -40,19 +47,7 @@ export function RenderTreeNode({ node, onAdd }: RenderTreeNodeProps) {
           hovered ? "block" : "hidden"
         } rounded-md bg-zinc-900 p-3 max-w-xs mt-3`}
         type="button"
-        onClick={() =>
-          onAdd({
-            name: uuid(),
-            element: {
-              name: "Test1",
-              sourcePort: 2,
-              destinationPort: 2,
-              protocol: "string",
-              cidrBlocks: ["string"],
-            },
-            children: [],
-          })
-        }
+        onClick={onAdd}
       >
         Add
       </button>

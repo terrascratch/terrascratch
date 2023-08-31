@@ -2,12 +2,13 @@ import { ElementContainer, InfraElement } from "@/infra-elements/types";
 import uuid from "react-uuid";
 
 export class TreeNode implements ElementContainer {
-  id: string = uuid();
+  id: string;
   name: string;
   element: InfraElement;
   children: TreeNode[] = [];
 
   constructor(container: ElementContainer) {
+    this.id = uuid();
     this.name = container.name;
     this.element = container.element;
     this.addChildren(container.children);
