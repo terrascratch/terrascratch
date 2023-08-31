@@ -19,6 +19,8 @@ export function RenderContainer({
   content = [],
 }: InfraElementProps) {
   const mappedElements = mapContent(content);
+
+  const [hovered, setHovered] = useState(false);
   const [elements, setElements] = useState(mappedElements);
 
   const handleAddElement = () => {
@@ -27,13 +29,19 @@ export function RenderContainer({
   };
 
   return (
-    <div className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
+    <div
+      className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <h1 className="font-bold text-lg">{container.name}</h1>
 
       <div>{elements}</div>
 
       <button
-        className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3"
+        className={`${
+          hovered ? "block" : "hidden"
+        } rounded-md bg-zinc-900 p-3 max-w-xs mt-3`}
         type="button"
         onClick={handleAddElement}
       >
