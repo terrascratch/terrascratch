@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import type { ElementContainer } from "@/infra-elements/types";
+import uuid from "react-uuid";
 
 interface InfraElementProps {
   container: ElementContainer;
@@ -9,7 +10,7 @@ interface InfraElementProps {
 
 function mapContent(children: ElementContainer[]) {
   return children.map((child) => {
-    return <RenderContainer key={String(Math.random())} container={child} />;
+    return <RenderContainer key={uuid()} container={child} />;
   });
 }
 
@@ -21,9 +22,7 @@ export function RenderContainer({
   const [elements, setElements] = useState(mappedElements);
 
   const handleAddElement = () => {
-    const newElement = (
-      <RenderContainer key={String(Math.random())} container={container} />
-    );
+    const newElement = <RenderContainer key={uuid()} container={container} />;
     setElements((oldElements) => [...oldElements, newElement]);
   };
 
