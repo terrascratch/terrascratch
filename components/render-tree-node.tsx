@@ -11,7 +11,6 @@ interface RenderTreeNodeProps {
 
 export function RenderTreeNode({ node }: RenderTreeNodeProps) {
   const hierarchy = useHierarchy();
-  const [hovered, setHovered] = useState(false);
 
   const onAdd = () => {
     hierarchy.addContainer(node.id, {
@@ -36,16 +35,12 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
   });
 
   return (
-    <div
-      className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
       <h1 className="font-bold text-lg">{node.name}</h1>
 
       <div>{mappedElements}</div>
 
-      <div className={`flex items-center ${hovered ? "block" : "hidden"}`}>
+      <div className="flex items-center">
         <button
           className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3"
           type="button"
