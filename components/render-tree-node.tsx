@@ -1,9 +1,7 @@
 "use client";
-import { useState } from "react";
-import type { ElementContainer } from "@/infra-elements/types";
-import uuid from "react-uuid";
 import { TreeNode } from "@/data-structures/tree";
 import { useHierarchy } from "@/contexts/hierarchy";
+import { getRandomContainer } from "@/mocks/containers";
 
 interface RenderTreeNodeProps {
   node: TreeNode;
@@ -13,20 +11,7 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
   const hierarchy = useHierarchy();
 
   const onAdd = () => {
-    const elementName = uuid();
-
-    hierarchy.addContainer(node.id, {
-      name: elementName,
-      element: {
-        name: elementName,
-        type: "VPC",
-        properties: {
-          name: "string",
-          cidrBlock: "ddawhi7hd873d827h3",
-        },
-      },
-      children: [],
-    });
+    hierarchy.addContainer(node.id, getRandomContainer());
   };
 
   const onDelete = () => {

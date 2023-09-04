@@ -36,10 +36,12 @@ export interface EC2 {
   vpc: VPC;
 }
 
+type PropertyValue = string | number | boolean | string[] | number[] | boolean[];
+
 export interface InfraElement {
   name: string;
   type: string;
-  properties: { [key: string]: string | number };
+  properties: { [key: string]: PropertyValue };
 };
 
 export interface ElementContainer {
