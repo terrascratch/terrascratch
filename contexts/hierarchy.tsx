@@ -9,14 +9,15 @@ export interface HierarchyContextState {
   removeContainer: (id: string) => void;
 }
 
-const defaultElementContainer = {
+const defaultElementContainer: ElementContainer = {
   name: "test1",
   element: {
     name: "Test1",
-    sourcePort: 2,
-    destinationPort: 2,
-    protocol: "string",
-    cidrBlocks: ["string"],
+    type: "VPC",
+    properties: {
+      name: "string",
+      cidrBlock: "ddawhi7hd873d827h3",
+    },
   },
   children: [],
 };

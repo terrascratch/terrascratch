@@ -13,14 +13,17 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
   const hierarchy = useHierarchy();
 
   const onAdd = () => {
+    const elementName = uuid();
+
     hierarchy.addContainer(node.id, {
-      name: uuid(),
+      name: elementName,
       element: {
-        name: "Test1",
-        sourcePort: 2,
-        destinationPort: 2,
-        protocol: "string",
-        cidrBlocks: ["string"],
+        name: elementName,
+        type: "VPC",
+        properties: {
+          name: "string",
+          cidrBlock: "ddawhi7hd873d827h3",
+        },
       },
       children: [],
     });
