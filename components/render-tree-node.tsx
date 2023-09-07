@@ -5,9 +5,10 @@ import { getRandomContainer } from "@/mocks/containers";
 
 interface RenderTreeNodeProps {
   node: TreeNode;
+  isRoot?: boolean;
 }
 
-export function RenderTreeNode({ node }: RenderTreeNodeProps) {
+export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
   const hierarchy = useHierarchy();
 
   const onAdd = () => {
@@ -37,13 +38,15 @@ export function RenderTreeNode({ node }: RenderTreeNodeProps) {
           Add
         </button>
 
-        <button
-          className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3"
-          type="button"
-          onClick={onDelete}
-        >
-          Delete
-        </button>
+        {!isRoot && (
+          <button
+            className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3"
+            type="button"
+            onClick={onDelete}
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

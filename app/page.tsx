@@ -22,7 +22,7 @@ export default function Home() {
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
       <section className="flex flex-1 flex-col items-center justify-center">
-        <RenderTreeNode node={hierarchy.root} />
+        <RenderTreeNode isRoot node={hierarchy.root} />
       </section>
 
       <footer className="text-slate-500 text-sm">
