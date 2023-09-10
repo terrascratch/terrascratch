@@ -15,7 +15,12 @@ function AvailableElements(props: AvailableElementsProps) {
   const childTypeButtons = template.childrenElementTypes.map((type) => {
     return (
       <li key={type}>
-        <button onClick={() => props.onSelect(type)}>{type}</button>
+        <button
+          className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
+          onClick={() => props.onSelect(type)}
+        >
+          {type}
+        </button>
       </li>
     );
   });
