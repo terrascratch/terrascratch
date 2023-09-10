@@ -1,0 +1,125 @@
+[
+  {
+    "type": "Subnet",
+    "properties": [
+      {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "cidrBlock",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "public",
+        "validTypes": ["boolean"],
+        "isRequired": true
+      }
+    ],
+    "childrenLists": [
+      {
+        "name": "VPCs",
+        "validElementTypes": ["VPC"]
+      }
+    ]
+  },
+  {
+    "type": "VPC",
+    "properties": [
+      {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "cidrBlock",
+        "validTypes": ["string"],
+        "isRequired": true
+      }
+    ],
+    "childrenLists": [
+      {
+        "name": "Security Groups",
+        "validElementTypes": ["SecurityGroup"]
+      },
+      {
+        "name": "Instances",
+        "validElementTypes": ["EC2"]
+      }
+    ]
+  },
+  {
+    "name": "EC2",
+    "properties": [
+      {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "ami",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "type",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "publicKey",
+        "validTypes": ["string"],
+        "isRequired": true
+      }
+    ],
+    "childrenLists": []
+  },
+  {
+    "name": "SecurityGroup",
+    "properties": [
+      {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      }
+    ],
+    "childrenLists": [
+      {
+        "name": "Ingress",
+        "validElementTypes": ["SecurityGroupRule"]
+      },
+      {
+        "name": "Egress",
+        "validElementTypes": ["SecurityGroupRule"]
+      }
+    ]
+  },
+  {
+    "name": "SecurityGroupRule",
+    "properties": [
+      {
+        "name": "protocol",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "sourcePort",
+        "validTypes": ["number"],
+        "isRequired": true
+      },
+      {
+        "name": "destinationPort",
+        "validTypes": ["number"],
+        "isRequired": true
+      },
+      {
+        "name": "cidrBlocks",
+        "validTypes": ["string[]"],
+        "isRequired": true
+      }
+    ],
+    "childrenLists": []
+  }
+]
