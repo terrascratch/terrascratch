@@ -1,4 +1,7 @@
 import { useHierarchy } from "@/contexts/hierarchy";
+import { CreationSection } from "./creation-section";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export function CreateElementModal() {
   const hierarchy = useHierarchy();
@@ -7,6 +10,12 @@ export function CreateElementModal() {
 
   const closeModal = () => {
     hierarchy.setSelectedNode(null);
+  };
+
+  const [finishedCreation, setFinishedCreation] = useState(false);
+
+  const onCreate = () => {
+    closeModal();
   };
 
   return (
@@ -41,27 +50,29 @@ export function CreateElementModal() {
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <h3
-                    className="text-base font-semibold leading-6 text-white"
+                    className="text-lg font-semibold leading-6 text-white"
                     id="modal-title"
                   >
                     Add new element
                   </h3>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Consequatur amet labore.
-                    </p>
+                    <CreationSection
+                      onFinish={() => setFinishedCreation(true)}
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-gray-700 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button
-                type="button"
-                className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-              >
-                Create
-              </button>
+              {finishedCreation && (
+                <button
+                  type="button"
+                  onClick={onCreate}
+                  className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                >
+                  Create
+                </button>
+              )}
               <button
                 type="button"
                 onClick={closeModal}
