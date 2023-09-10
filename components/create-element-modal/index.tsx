@@ -1,12 +1,9 @@
 import { useHierarchy } from "@/contexts/hierarchy";
 import { CreationSection } from "./creation-section";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 export function CreateElementModal() {
   const hierarchy = useHierarchy();
-
-  const isOpen = hierarchy.selectedNode !== null;
 
   const closeModal = () => {
     hierarchy.setSelectedNode(null);
@@ -18,9 +15,11 @@ export function CreateElementModal() {
     closeModal();
   };
 
+  if (hierarchy.selectedNode === null) return null;
+
   return (
     <div
-      className={`relative z-10 ${!isOpen ? "hidden" : ""}`}
+      className="relative z-10"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -57,6 +56,7 @@ export function CreateElementModal() {
                   </h3>
                   <div className="mt-2">
                     <CreationSection
+                      parentElement={hierarchy.selectedNode.element}
                       onFinish={() => setFinishedCreation(true)}
                     />
                   </div>
