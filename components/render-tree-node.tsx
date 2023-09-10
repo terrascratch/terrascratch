@@ -1,6 +1,7 @@
 "use client";
 import { TreeNode } from "@/data-structures/tree";
 import { useHierarchy } from "@/contexts/hierarchy";
+import { useTemplate } from "@/hooks/template";
 
 function ShowNodeDetails({ node }: { node: TreeNode }) {
   const properties = Object.entries(node.element.properties).filter(
@@ -32,6 +33,7 @@ interface RenderTreeNodeProps {
 }
 
 export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
+  const template = useTemplate(node.element.type);
   const hierarchy = useHierarchy();
 
   const onAdd = () => {
@@ -53,13 +55,15 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
       <div>{mappedElements}</div>
 
       <div className="flex items-center">
-        <button
-          className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3"
-          type="button"
-          onClick={onAdd}
-        >
-          Add
-        </button>
+        {template.childrenElementTypes.length > 0 && (
+          <button
+            className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3"
+            type="button"
+            onClick={onAdd}
+          >
+            Add
+          </button>
+        )}
 
         {!isRoot && (
           <button
