@@ -9,12 +9,6 @@ export function CreateElementModal() {
     hierarchy.setSelectedNode(null);
   };
 
-  const [finishedCreation, setFinishedCreation] = useState(false);
-
-  const onCreate = () => {
-    closeModal();
-  };
-
   if (hierarchy.selectedNode === null) return null;
 
   return (
@@ -47,32 +41,22 @@ export function CreateElementModal() {
                     />
                   </svg>
                 </div>
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                <div className="mt-3 w-full text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <h3
                     className="text-lg font-semibold leading-6 text-white"
                     id="modal-title"
                   >
                     Add new element
                   </h3>
-                  <div className="mt-2">
+                  <div className="mt-2 w-full">
                     <CreationSection
                       parentElement={hierarchy.selectedNode.element}
-                      onFinish={() => setFinishedCreation(true)}
                     />
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-gray-700 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              {finishedCreation && (
-                <button
-                  type="button"
-                  onClick={onCreate}
-                  className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                >
-                  Create
-                </button>
-              )}
               <button
                 type="button"
                 onClick={closeModal}
