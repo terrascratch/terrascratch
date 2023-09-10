@@ -39,28 +39,25 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
   const inputs = template.properties.map((property) => {
     return (
       <li key={property.name}>
-        <Input
-          label={property.name}
-          placeholder={`Preencha o valor para ${property.name}`}
-        />
+        <Input property={property} />
       </li>
     );
   });
 
   return (
-    <section className="w-full">
+    <section className="w-full flex flex-col">
       <h3>Fill the properties of the new {elementType}</h3>
 
       <ul>{inputs}</ul>
 
-      <div className="flex w-full items-center justify-end">
-        <button
-          type="button"
-          className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 mt-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:w-auto"
-        >
-          Create
-        </button>
-      </div>
+      <span className="mt-5">* Required fields</span>
+
+      <button
+        type="button"
+        className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 mt-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 w-40"
+      >
+        Create
+      </button>
     </section>
   );
 }

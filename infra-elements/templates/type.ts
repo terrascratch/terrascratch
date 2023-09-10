@@ -1,4 +1,4 @@
-interface Property {
+export interface Property {
   name: string;
   validTypes: string[];
   isRequired: boolean;
