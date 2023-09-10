@@ -7,7 +7,7 @@ interface AvailableElementsProps {
 function AvailableElements(props: AvailableElementsProps) {
   return (
     <section>
-      <h3>Select one avaiable child element type</h3>
+      <h3>Select one available child element type</h3>
 
       <ul>
         <li>
