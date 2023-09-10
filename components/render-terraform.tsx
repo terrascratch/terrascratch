@@ -8,7 +8,7 @@ export function RenderTerraform() {
   const code = useTerraform(hierarchy.root);
 
   return (
-    <SyntaxHighlighter language="javascript" style={dracula}>
+    <SyntaxHighlighter language="hcl" style={dracula}>
       {code}
     </SyntaxHighlighter>
   );

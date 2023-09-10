@@ -2,13 +2,12 @@ import { ElementContainer } from "@/infra-elements/types";
 
 
 export const defaultElementContainer: ElementContainer = {
-  name: "Main Subnet",
+  name: "Main VPC",
   element: {
-    type: "Subnet",
+    type: "VPC",
     properties: {
-      name: "Main Subnet",
-      cidrBlock: "ddawhi7hd873d827h3",
-      public: true,
+      name: "Main VPC",
+      cidrBlock: "192.168.0.0/16",
     },
   },
   children: [],

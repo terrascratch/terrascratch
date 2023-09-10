@@ -18,7 +18,7 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["VPC"]
+    "childrenElementTypes": ["EC2"]
   },
   {
     "type": "VPC",
@@ -34,7 +34,7 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["SecurityGroup", "EC2"]
+    "childrenElementTypes": ["Subnet", "SecurityGroup"]
   },
   {
     "type": "EC2",
@@ -45,17 +45,12 @@
         "isRequired": true
       },
       {
-        "name": "ami",
+        "name": "imageId",
         "validTypes": ["string"],
         "isRequired": true
       },
       {
-        "name": "type",
-        "validTypes": ["string"],
-        "isRequired": true
-      },
-      {
-        "name": "publicKey",
+        "name": "instanceType",
         "validTypes": ["string"],
         "isRequired": true
       }
