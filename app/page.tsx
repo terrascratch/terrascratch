@@ -33,7 +33,7 @@ export default function Home() {
         from Freepik
       </footer>
 
-      <Modal isOpen onClose={() => {}} />
+      <Modal />
     </main>
   );
 }

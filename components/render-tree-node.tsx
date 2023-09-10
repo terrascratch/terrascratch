@@ -12,7 +12,8 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
   const hierarchy = useHierarchy();
 
   const onAdd = () => {
-    hierarchy.addContainer(node.id, getRandomContainer());
+    hierarchy.setSelectedNode(node);
+    // hierarchy.addContainer(node.id, getRandomContainer());
   };
 
   const onDelete = () => {

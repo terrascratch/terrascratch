@@ -7,6 +7,8 @@ export interface HierarchyContextState {
   root: TreeNode;
   addContainer: (toId: string, container: ElementContainer) => void;
   removeContainer: (id: string) => void;
+  selectedNode: TreeNode | null;
+  setSelectedNode: (node: TreeNode | null) => void;
 }
 
 const defaultElementContainer: ElementContainer = {
@@ -26,6 +28,8 @@ const contextDefaultValues: HierarchyContextState = {
   root: new TreeNode(defaultElementContainer),
   addContainer: () => {},
   removeContainer: () => {},
+  selectedNode: null,
+  setSelectedNode: () => {},
 };
 
 export const HierarchyContext =
@@ -33,6 +37,7 @@ export const HierarchyContext =
 
 export function HierarchyProvider({ children }: { children: React.ReactNode }) {
   const [root, setRoot] = useState<TreeNode>(contextDefaultValues.root);
+  const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
 
   const addContainer = (toId: string, container: ElementContainer) => {
     const newNode = new TreeNode(container);
@@ -51,6 +56,8 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
         root,
         addContainer,
         removeContainer,
+        selectedNode,
+        setSelectedNode,
       }}
     >
       {children}
