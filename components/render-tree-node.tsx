@@ -1,7 +1,30 @@
 "use client";
 import { TreeNode } from "@/data-structures/tree";
 import { useHierarchy } from "@/contexts/hierarchy";
-import { getRandomContainer } from "@/mocks/containers";
+
+function ShowNodeDetails({ node }: { node: TreeNode }) {
+  const properties = Object.entries(node.element.properties).filter(
+    ([key]) => key !== "name"
+  );
+  const propertiesInfos = properties.map(([key, value]) => {
+    return (
+      <div key={key}>
+        <span className="font-bold">{key}</span>: {String(value)}
+      </div>
+    );
+  });
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex items-center justify-start">
+        <h1 className="font-bold mr-3 text-xl">{node.name}</h1>
+        <span>| {node.element.type}</span>
+      </div>
+
+      <div className="flex flex-col mt-3">{propertiesInfos}</div>
+    </div>
+  );
+}
 
 interface RenderTreeNodeProps {
   node: TreeNode;
@@ -25,7 +48,7 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
 
   return (
     <div className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
-      <h1 className="font-bold text-lg">{node.name}</h1>
+      <ShowNodeDetails node={node} />
 
       <div>{mappedElements}</div>
 
