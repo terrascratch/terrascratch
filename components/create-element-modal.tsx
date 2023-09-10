@@ -1,6 +1,6 @@
 import { useHierarchy } from "@/contexts/hierarchy";
 
-export function Modal() {
+export function CreateElementModal() {
   const hierarchy = useHierarchy();
 
   const isOpen = hierarchy.selectedNode !== null;

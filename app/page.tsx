@@ -1,5 +1,5 @@
 "use client";
-import { Modal } from "@/components/modal";
+import { CreateElementModal } from "@/components/create-element-modal";
 import { RenderTreeNode } from "@/components/render-tree-node";
 import { useHierarchy } from "@/contexts/hierarchy";
 import NextImage from "next/image";
@@ -33,7 +33,7 @@ export default function Home() {
         from Freepik
       </footer>
 
-      <Modal />
+      <CreateElementModal />
     </main>
   );
 }
