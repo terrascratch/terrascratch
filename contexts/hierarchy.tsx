@@ -12,13 +12,13 @@ export interface HierarchyContextState {
 }
 
 const defaultElementContainer: ElementContainer = {
-  name: "test1",
+  name: "Main Subnet",
   element: {
-    name: "Test1",
-    type: "VPC",
+    type: "Subnet",
     properties: {
-      name: "string",
+      name: "Main Subnet",
       cidrBlock: "ddawhi7hd873d827h3",
+      public: true,
     },
   },
   children: [],

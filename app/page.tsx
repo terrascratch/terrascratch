@@ -3,6 +3,7 @@ import { CreateElementModal } from "@/components/create-element-modal";
 import { RenderTreeNode } from "@/components/render-tree-node";
 import { useHierarchy } from "@/contexts/hierarchy";
 import NextImage from "next/image";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
   const hierarchy = useHierarchy();
@@ -34,6 +35,7 @@ export default function Home() {
       </footer>
 
       <CreateElementModal />
+      <ToastContainer />
     </main>
   );
 }
