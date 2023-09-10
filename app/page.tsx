@@ -10,7 +10,7 @@ export default function Home() {
   const hierarchy = useHierarchy();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="w-full flex min-h-screen flex-col items-center justify-center p-24">
       <header className="flex flex-col items-center justify-center">
         <NextImage
           src="/logo.png"
@@ -24,7 +24,7 @@ export default function Home() {
       </header>
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
-      <div className="flex-1 flex items-center justify-center">
+      <div className="mt-5 flex-1 w-full flex items-center justify-center">
         <section className="flex flex-1 flex-col items-center justify-center mr-5">
           <RenderTreeNode isRoot node={hierarchy.root} />
         </section>

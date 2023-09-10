@@ -17,9 +17,9 @@ function ShowNodeDetails({ node }: { node: TreeNode }) {
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center justify-start">
+      <div className="flex flex-col items-start justify-center">
         <h1 className="font-bold mr-3 text-xl">{node.name}</h1>
-        <span>| {node.element.type}</span>
+        <span className="text-gray-500">| {node.element.type}</span>
       </div>
 
       <div className="flex flex-col mt-3">{propertiesInfos}</div>
@@ -49,7 +49,7 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
   });
 
   return (
-    <div className="my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
+    <div className="w-full my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
       <ShowNodeDetails node={node} />
 
       <div>{mappedElements}</div>
