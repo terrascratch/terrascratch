@@ -37,7 +37,7 @@
     "childrenElementTypes": ["SecurityGroup", "EC2"]
   },
   {
-    "name": "EC2",
+    "type": "EC2",
     "properties": [
       {
         "name": "name",
@@ -63,7 +63,7 @@
     "childrenElementTypes": []
   },
   {
-    "name": "SecurityGroup",
+    "type": "SecurityGroup",
     "properties": [
       {
         "name": "name",
@@ -74,7 +74,7 @@
     "childrenElementTypes": ["SecurityGroupRule"]
   },
   {
-    "name": "SecurityGroupRule",
+    "type": "SecurityGroupRule",
     "properties": [
       {
         "name": "type",
