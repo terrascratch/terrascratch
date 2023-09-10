@@ -24,14 +24,14 @@ export default function Home() {
       </header>
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
-      <div className="mt-5 flex-1 w-full flex items-center justify-center">
-        <section className="flex flex-1 flex-col items-center justify-center mr-5">
+      <div className="mt-5 flex-1 flex items-start justify-center">
+        <section className="flex-1 mr-5">
           <RenderTreeNode isRoot node={hierarchy.root} />
         </section>
 
-        <section className="flex flex-1 flex-col items-center justify-center">
+        <div className="mt-3">
           <RenderTerraform />
-        </section>
+        </div>
       </div>
 
       <footer className="text-slate-500 text-sm">
