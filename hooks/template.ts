@@ -7,5 +7,20 @@ export function useTemplate(elementType: string) {
     throw new Error(`No template found for ${elementType}`);
   }
 
-  return template;
+  const isAllRequiredFieldsFilled = (properties: Record<string, any>) => {
+    return template.properties.every(
+      (property) => {
+        if (property.isRequired) {
+          return properties[property.name] !== undefined;
+        }
+
+        return true;
+      }
+    );
+  }
+
+  return {
+    ...template,
+    isAllRequiredFieldsFilled
+  };
 }

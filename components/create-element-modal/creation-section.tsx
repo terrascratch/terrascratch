@@ -3,6 +3,7 @@ import { useTemplate } from "@/hooks/template";
 import { InfraElement } from "@/infra-elements/types";
 import { useState } from "react";
 import { Input } from "./input";
+import { toast } from "react-toastify";
 
 interface AvailableElementsProps {
   parentElement: InfraElement;
@@ -39,15 +40,50 @@ interface ElementCreationSetupProps {
 }
 
 function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
+  const hierarchy = useHierarchy();
   const template = useTemplate(elementType);
+
+  const [propertyValues, setPropertyValues] = useState<Record<string, string>>(
+    {}
+  );
 
   const inputs = template.properties.map((property) => {
     return (
       <li key={property.name}>
-        <Input property={property} />
+        <Input
+          property={property}
+          onChange={(value) =>
+            setPropertyValues({
+              ...propertyValues,
+              [property.name]: value,
+            })
+          }
+        />
       </li>
     );
   });
+
+  const onCreate = () => {
+    if (!template.isAllRequiredFieldsFilled(propertyValues)) {
+      toast.error("You must fill all required properties");
+      return;
+    }
+
+    if (hierarchy.selectedNode === null) {
+      toast.error("You must select a parent element");
+      return;
+    }
+
+    hierarchy.addContainer(hierarchy.selectedNode.id, {
+      name: propertyValues?.name || elementType,
+      element: {
+        type: elementType,
+        properties: propertyValues,
+      },
+      children: [],
+    });
+    hierarchy.setSelectedNode(null);
+  };
 
   return (
     <section className="w-full flex flex-col">
@@ -59,6 +95,7 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
 
       <button
         type="button"
+        onClick={onCreate}
         className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 mt-3 text-sm font-semibold text-white shadow-sm hover:bg-green-500 w-40"
       >
         Create
