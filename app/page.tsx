@@ -1,4 +1,5 @@
 "use client";
+import { Modal } from "@/components/modal";
 import { RenderTreeNode } from "@/components/render-tree-node";
 import { useHierarchy } from "@/contexts/hierarchy";
 import NextImage from "next/image";
@@ -31,6 +32,8 @@ export default function Home() {
         </a>{" "}
         from Freepik
       </footer>
+
+      <Modal isOpen onClose={() => {}} />
     </main>
   );
 }
