@@ -1,5 +1,6 @@
 "use client";
 import { CreateElementModal } from "@/components/create-element-modal";
+import { RenderTerraform } from "@/components/render-terraform";
 import { RenderTreeNode } from "@/components/render-tree-node";
 import { useHierarchy } from "@/contexts/hierarchy";
 import NextImage from "next/image";
@@ -23,9 +24,15 @@ export default function Home() {
       </header>
 
       <p>Select your infraestructure elements and configure the hierarchy.</p>
-      <section className="flex flex-1 flex-col items-center justify-center">
-        <RenderTreeNode isRoot node={hierarchy.root} />
-      </section>
+      <div className="flex-1 flex items-center justify-center">
+        <section className="flex flex-1 flex-col items-center justify-center mr-5">
+          <RenderTreeNode isRoot node={hierarchy.root} />
+        </section>
+
+        <section className="flex flex-1 flex-col items-center justify-center">
+          <RenderTerraform />
+        </section>
+      </div>
 
       <footer className="text-slate-500 text-sm">
         <a href="https://br.freepik.com/vetores-gratis/logotipo-detalhado-do-bebe_10806892.htm#query=baby%20logo&position=1&from_view=search&track=ais">
