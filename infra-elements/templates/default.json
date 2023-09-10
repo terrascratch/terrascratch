@@ -18,12 +18,7 @@
         "isRequired": true
       }
     ],
-    "childrenLists": [
-      {
-        "name": "VPCs",
-        "validElementTypes": ["VPC"]
-      }
-    ]
+    "childrenElementTypes": ["VPC"]
   },
   {
     "type": "VPC",
@@ -39,16 +34,7 @@
         "isRequired": true
       }
     ],
-    "childrenLists": [
-      {
-        "name": "Security Groups",
-        "validElementTypes": ["SecurityGroup"]
-      },
-      {
-        "name": "Instances",
-        "validElementTypes": ["EC2"]
-      }
-    ]
+    "childrenElementTypes": ["SecurityGroup", "EC2"]
   },
   {
     "name": "EC2",
@@ -74,7 +60,7 @@
         "isRequired": true
       }
     ],
-    "childrenLists": []
+    "childrenElementTypes": []
   },
   {
     "name": "SecurityGroup",
@@ -85,20 +71,16 @@
         "isRequired": true
       }
     ],
-    "childrenLists": [
-      {
-        "name": "Ingress",
-        "validElementTypes": ["SecurityGroupRule"]
-      },
-      {
-        "name": "Egress",
-        "validElementTypes": ["SecurityGroupRule"]
-      }
-    ]
+    "childrenElementTypes": ["SecurityGroupRule"]
   },
   {
     "name": "SecurityGroupRule",
     "properties": [
+      {
+        "name": "type",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
       {
         "name": "protocol",
         "validTypes": ["string"],
@@ -120,6 +102,6 @@
         "isRequired": true
       }
     ],
-    "childrenLists": []
+    "childrenElementTypes": []
   }
 ]
