@@ -13,7 +13,6 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
 
   const onAdd = () => {
     hierarchy.setSelectedNode(node);
-    // hierarchy.addContainer(node.id, getRandomContainer());
   };
 
   const onDelete = () => {
