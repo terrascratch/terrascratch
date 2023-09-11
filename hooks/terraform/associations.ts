@@ -14,7 +14,7 @@ function getSubnetCode(node: TreeNode, root: TreeNode) {
 }`
 }
 
-function getVPCCode(node: TreeNode, root: TreeNode) {
+function getVPCCode(node: TreeNode) {
   const vpc = node.element
   return `resource "aws_vpc" "${vpc.properties.name}" {
   cidr_block = "${vpc.properties.cidrBlock}"
@@ -31,16 +31,16 @@ function getEC2Code(node: TreeNode, root: TreeNode) {
   return `resource "aws_instance" "${ec2.properties.name}" {
   ami           = "${ec2.properties.imageId}"
   instance_type = "${ec2.properties.instanceType}"
-  subnet_id     =   aws_subnet.${subnet?.properties.name}.id
+  subnet_id     = aws_subnet.${subnet?.properties.name}.id
 }`
 }
 
 function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
   const securityGroup = node.element
-  //const vpc = node.findParentByType(VPC_NAME)?.element
   if (node.parentId === null) {
     throw Error()
   }
+
   const vpc = root.findNode(node.parentId)?.element
   const securityGroupRules = node.findChildren("SecurityGroupRule")
 
@@ -51,12 +51,12 @@ function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
   ${securityGroupRules?.map(rule => {
     const { fromPort, toPort, protocol, cidrBlocks } = rule.element.properties
 
-    return `${rule.element.properties.type} {
+    return `\n  ${rule.element.properties.type} {
       from_port   = ${fromPort}
       to_port     = ${toPort}
-      protocol    = ${protocol}
+      protocol    = "${protocol}"
       cidr_blocks = ${cidrBlocks}
-    }`
+  }`
   }) ?? ''}
 }`
 }
@@ -66,7 +66,7 @@ export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
     case "Subnet":
       return getSubnetCode(fromElement, root)
     case "VPC":
-      return getVPCCode(fromElement, root)
+      return getVPCCode(fromElement)
     case "EC2":
       return getEC2Code(fromElement, root)
     case "SecurityGroup":
