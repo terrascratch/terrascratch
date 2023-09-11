@@ -2,8 +2,8 @@ import { useHierarchy } from "@/contexts/hierarchy";
 import { useTemplate } from "@/hooks/template";
 import { InfraElement } from "@/infra-elements/types";
 import { useState } from "react";
-import { Input } from "./input";
 import { toast } from "react-toastify";
+import { Input } from "./input";
 
 interface AvailableElementsProps {
   parentElement: InfraElement;
@@ -52,11 +52,14 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
       <li key={property.name}>
         <Input
           property={property}
-          onChange={(value) =>
+          onChange={(value) => {
+            const realValue = property.input?.type === 'checkbox' ? `${value === 'on'}` :  value
+
             setPropertyValues({
               ...propertyValues,
-              [property.name]: value,
+              [property.name]: realValue,
             })
+          }
           }
         />
       </li>
@@ -75,12 +78,13 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
     }
 
     hierarchy.addContainer(hierarchy.selectedNode.id, {
-      name: propertyValues?.name || elementType,
+      name: propertyValues?.name ?? elementType,
       element: {
         type: elementType,
         properties: propertyValues,
       },
       children: [],
+      parentId: hierarchy.selectedNode.id
     });
     hierarchy.setSelectedNode(null);
   };

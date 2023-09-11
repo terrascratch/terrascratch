@@ -2,7 +2,7 @@
 import { TreeNode } from "@/data-structures/tree";
 import { ElementContainer } from "@/infra-elements/types";
 import { defaultElementContainer } from "@/mocks/containers";
-import { createContext, useState, FC, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 export interface HierarchyContextState {
   root: TreeNode;
@@ -28,7 +28,7 @@ export function HierarchyProvider({ children }: { children: React.ReactNode }) {
   const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
 
   const addContainer = (toId: string, container: ElementContainer) => {
-    const newNode = new TreeNode(container);
+    const newNode = new TreeNode(container, toId);
     root.addChild(toId, newNode);
     setRoot(root.deepCopy());
   };

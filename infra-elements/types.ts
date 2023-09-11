@@ -1,3 +1,4 @@
+
 type PropertyValue = string | number | boolean | string[] | number[] | boolean[];
 
 export interface InfraElement {
@@ -9,4 +10,5 @@ export interface ElementContainer {
   name: string;
   element: InfraElement;
   children: ElementContainer[];
+  parentId: string | null
 }

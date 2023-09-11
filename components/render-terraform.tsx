@@ -29,7 +29,7 @@ export function RenderTerraform() {
       <CopyToClipboard text={code} onCopy={handleCopy}>
         <button
           disabled={copied}
-          className="disabled:bg-gray-900 disabled:text-slate-500 transition ease-in-out bg-[#282A36] hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-full shadow"
+          className="float-right disabled:bg-gray-900 disabled:text-slate-500 transition ease-in-out bg-[#282A36] hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-full shadow"
         >
           <FaRegCopy/>
         </button>
