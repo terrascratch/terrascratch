@@ -49,7 +49,7 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
   });
 
   return (
-    <div className="w-full my-5 p-3 px-10 border-solid border-2 border-black bg-zinc-950 rounded-md flex flex-col justify-center">
+    <div className="w-full my-5 p-3 px-10 border-solid border-2 border-black bg-gray-900 rounded-md flex flex-col justify-center">
       <ShowNodeDetails node={node} />
 
       <div>{mappedElements}</div>
@@ -57,7 +57,7 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
       <div className="flex items-center">
         {template.childrenElementTypes.length > 0 && (
           <button
-            className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3 mr-3"
+            className="rounded-md bg-gray-800 p-3 max-w-xs mt-3 mr-3"
             type="button"
             onClick={onAdd}
           >
@@ -67,7 +67,7 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
 
         {!isRoot && (
           <button
-            className="rounded-md bg-zinc-900 p-3 max-w-xs mt-3"
+            className="rounded-md bg-gray-800 p-3 max-w-xs mt-3"
             type="button"
             onClick={onDelete}
           >
