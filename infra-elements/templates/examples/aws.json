@@ -1,0 +1,107 @@
+[
+  {
+    "type": "SecurityGroupRule",
+    "templates": [
+      {
+        "label": "Ingress SSH",
+        "properties": [
+          {
+            "name": "type",
+            "value": "ingress"
+          },
+          {
+            "name": "fromPort",
+            "value": 22
+          },
+          {
+            "name": "toPort",
+            "value": 22
+          },
+          {
+            "name": "protocol",
+            "value": "tcp"
+          },
+          {
+            "name": "cidrBlocks",
+            "value": ["0.0.0.0/0"]
+          }
+        ]
+      },
+      {
+        "label": "Ingress HTTP",
+        "properties": [
+            {
+              "name": "type",
+              "value": "ingress"
+            },
+            {
+              "name": "fromPort",
+              "value": 80
+            },
+            {
+              "name": "toPort",
+              "value": 80
+            },
+            {
+              "name": "protocol",
+              "value": "tcp"
+            },
+            {
+              "name": "cidrBlocks",
+              "value": ["0.0.0.0/0"]
+            }
+          ]
+      },
+      {
+        "label": "Full outbound",
+        "properties": [
+          {
+            "name": "type",
+            "value": "egress"
+          },
+          {
+            "name": "fromPort",
+            "value": 0
+          },
+          {
+            "name": "toPort",
+            "value": 0
+          },
+          {
+            "name": "protocol",
+            "value": "-1"
+          },
+          {
+            "name": "cidrBlocks",
+            "value": ["0.0.0.0/0"]
+          }
+        ]
+      },
+      {
+        "label": "K8S worker node",
+        "properties": [
+          {
+            "name": "type",
+            "value": "ingress"
+          },
+          {
+            "name": "fromPort",
+            "value": 30000
+          },
+          {
+            "name": "toPort",
+            "value": 32767
+          },
+          {
+            "name": "protocol",
+            "value": "tcp"
+          },
+          {
+            "name": "cidrBlocks",
+            "value": ["0.0.0.0/0"]
+          }
+        ]
+      }
+    ]
+  }
+]

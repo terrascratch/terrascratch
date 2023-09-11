@@ -1,5 +1,5 @@
 
-type PropertyValue = string | number | boolean | string[] | number[] | boolean[];
+export type PropertyValue = string | number | boolean | string[] | number[] | boolean[];
 
 export interface InfraElement {
   type: string;

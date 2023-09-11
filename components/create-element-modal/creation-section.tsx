@@ -1,6 +1,6 @@
 import { useHierarchy } from "@/contexts/hierarchy";
-import { useTemplate } from "@/hooks/template";
-import { InfraElement } from "@/infra-elements/types";
+import { useExample, useTemplate } from "@/hooks/template";
+import { InfraElement, PropertyValue } from "@/infra-elements/types";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Input } from "./input";
@@ -66,12 +66,22 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
     );
   });
 
-  const onCreate = () => {
-    if (!template.isAllRequiredFieldsFilled(propertyValues)) {
-      toast.error("You must fill all required properties");
-      return;
-    }
+  const examples = useExample(elementType).map(example => {
+    return (
+      <button className="btn" key={example.label} onClick={() => {
+        let props = {}
+        example.properties.forEach(property => {
+          props = {...props, [property.name]: `${property.value}`}
+        })
 
+        addContainer(props)
+      }}>
+        {example.label}
+      </button>
+    )
+  })
+
+  const addContainer = (properties: { [key: string]: PropertyValue }) => {
     if (hierarchy.selectedNode === null) {
       toast.error("You must select a parent element");
       return;
@@ -81,16 +91,23 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
       name: propertyValues?.name ?? elementType,
       element: {
         type: elementType,
-        properties: propertyValues,
+        properties: properties,
       },
       children: [],
       parentId: hierarchy.selectedNode.id
     });
     hierarchy.setSelectedNode(null);
+  }
+
+  const onCreate = () => {
+    addContainer(propertyValues)
   };
 
   return (
     <section className="w-full flex flex-col">
+      <div>
+        {examples}
+      </div>
       <h3>Fill the properties of the new {elementType}</h3>
 
       <ul>{inputs}</ul>
