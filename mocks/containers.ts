@@ -7,7 +7,7 @@ export const defaultElementContainer: ElementContainer = {
     type: "VPC",
     properties: {
       name: "Main VPC",
-      cidrBlock: "192.168.1.0/24",
+      cidrBlock: "192.168.0.0/16",
     },
   },
   children: [],

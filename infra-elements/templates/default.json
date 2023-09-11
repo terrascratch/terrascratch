@@ -34,7 +34,7 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["SecurityGroup", "EC2"]
+    "childrenElementTypes": ["EC2", "SecurityGroup"]
   },
   {
     "type": "EC2",
@@ -45,17 +45,12 @@
         "isRequired": true
       },
       {
-        "name": "ami",
+        "name": "imageId",
         "validTypes": ["string"],
         "isRequired": true
       },
       {
-        "name": "type",
-        "validTypes": ["string"],
-        "isRequired": true
-      },
-      {
-        "name": "publicKey",
+        "name": "instanceType",
         "validTypes": ["string"],
         "isRequired": true
       }

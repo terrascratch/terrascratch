@@ -4,6 +4,7 @@ function getSubnetCode(subnet: InfraElement) {
   return `resource "aws_subnet" "${subnet.properties.name}" {
   vpc_id     = aws_vpc.id
   cidr_block = "${subnet.properties.cidrBlock}"
+  map_public_ip_on_launch = ${subnet.properties.public}
 }`
 }
 
@@ -15,8 +16,8 @@ function getVPCCode(vpc: InfraElement) {
 
 function getEC2Code(ec2: InfraElement) {
   return `resource "aws_instance" "${ec2.properties.name}" {
-  ami           = "${ec2.properties.ami}"
-  instance_type = "${ec2.properties.type}"
+  ami           = "${ec2.properties.imageId}"
+  instance_type = "${ec2.properties.instanceType}"
 }`
 }
 
