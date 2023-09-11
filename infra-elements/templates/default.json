@@ -34,7 +34,7 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["Subnet", "SecurityGroup"]
+    "childrenElementTypes": ["EC2", "SecurityGroup"]
   },
   {
     "type": "EC2",
