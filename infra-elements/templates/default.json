@@ -1,5 +1,21 @@
 [
   {
+    "type": "VPC",
+    "properties": [
+      {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "cidrBlock",
+        "validTypes": ["string"],
+        "isRequired": true
+      }
+    ],
+    "childrenElementTypes": ["Subnet"]
+  },
+  {
     "type": "Subnet",
     "properties": [
       {
@@ -15,22 +31,6 @@
       {
         "name": "public",
         "validTypes": ["boolean"],
-        "isRequired": true
-      }
-    ],
-    "childrenElementTypes": ["EC2"]
-  },
-  {
-    "type": "VPC",
-    "properties": [
-      {
-        "name": "name",
-        "validTypes": ["string"],
-        "isRequired": true
-      },
-      {
-        "name": "cidrBlock",
-        "validTypes": ["string"],
         "isRequired": true
       }
     ],
