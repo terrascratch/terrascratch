@@ -6,17 +6,19 @@ export class TreeNode implements ElementContainer {
   name: string;
   element: InfraElement;
   children: TreeNode[] = [];
+  parentId: string | null;
 
-  constructor(container: ElementContainer) {
+  constructor(container: ElementContainer, parentId: string | null = null) {
     this.id = uuid();
     this.name = container.name;
     this.element = container.element;
     this.addChildren(container.children);
+    this.parentId = parentId
   }
 
   addChildren(containers: ElementContainer[]) {
     for (const container of containers) {
-      this.children.push(new TreeNode(container));
+      this.children.push(new TreeNode(container, this.id));
     }
   }
 
@@ -34,15 +36,16 @@ export class TreeNode implements ElementContainer {
   }
 
   addChild(toId: string, container: ElementContainer) {
-    const node = new TreeNode(container);
     const parent = this.findNode(toId);
 
     if (parent === null) {
       throw new Error(`Could not find node with id ${toId}`);
     }
 
+    const node = new TreeNode(container, parent.id);
     parent.children.push(node);
   }
+
 
   removeChild(idToRemove: string) {
     for (let i = 0; i < this.children.length; i++) {
@@ -59,5 +62,15 @@ export class TreeNode implements ElementContainer {
 
   deepCopy(): TreeNode {
     return new TreeNode(this);
+  }
+
+  findChildren(type: string): TreeNode[] {
+    let res = []
+    for (const child of this.children) {
+      if (child.element.type === type) {
+        res.push(child)
+      }
+    }
+    return res
   }
 }

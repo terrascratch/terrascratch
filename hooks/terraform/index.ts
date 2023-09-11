@@ -2,7 +2,6 @@ import { TreeNode } from "@/data-structures/tree";
 import { getTerraformCode } from "./associations";
 
 
-
 export function useTerraform(root: TreeNode) {
   let initialCodeString =
     'provider "aws" {\n\
@@ -10,7 +9,7 @@ export function useTerraform(root: TreeNode) {
 }';
 
   const addNodeCode = (node: TreeNode) => {
-    initialCodeString += '\n\n' + getTerraformCode(node.element)
+    initialCodeString += '\n\n' + getTerraformCode(node, root)
 
     for (const current of node.children) {
       addNodeCode(current)

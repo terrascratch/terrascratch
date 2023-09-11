@@ -82,12 +82,12 @@
         "isRequired": true
       },
       {
-        "name": "sourcePort",
+        "name": "fromPort",
         "validTypes": ["number"],
         "isRequired": true
       },
       {
-        "name": "destinationPort",
+        "name": "toPort",
         "validTypes": ["number"],
         "isRequired": true
       },

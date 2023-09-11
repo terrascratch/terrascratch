@@ -2,8 +2,8 @@ import { useHierarchy } from "@/contexts/hierarchy";
 import { useTemplate } from "@/hooks/template";
 import { InfraElement } from "@/infra-elements/types";
 import { useState } from "react";
-import { Input } from "./input";
 import { toast } from "react-toastify";
+import { Input } from "./input";
 
 interface AvailableElementsProps {
   parentElement: InfraElement;
@@ -81,6 +81,7 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
         properties: propertyValues,
       },
       children: [],
+      parentId: hierarchy.selectedNode.id
     });
     hierarchy.setSelectedNode(null);
   };
