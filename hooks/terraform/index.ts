@@ -5,7 +5,9 @@ import { getTerraformCode } from "./associations";
 export function useTerraform(root: TreeNode) {
   let initialCodeString =
     'provider "aws" {\n\
-  region = "us-east-1"\n\
+  region     = "my-aws-region-choice"\n\
+  access_key = "my-access-key"\n\
+  secret_key = "my-secret-key"\n\
 }';
 
   const addNodeCode = (node: TreeNode) => {

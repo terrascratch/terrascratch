@@ -52,11 +52,14 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
       <li key={property.name}>
         <Input
           property={property}
-          onChange={(value) =>
+          onChange={(value) => {
+            const realValue = property.input?.type === 'checkbox' ? `${value === 'on'}` :  value
+
             setPropertyValues({
               ...propertyValues,
-              [property.name]: value,
+              [property.name]: realValue,
             })
+          }
           }
         />
       </li>
@@ -75,7 +78,7 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
     }
 
     hierarchy.addContainer(hierarchy.selectedNode.id, {
-      name: propertyValues?.name || elementType,
+      name: propertyValues?.name ?? elementType,
       element: {
         type: elementType,
         properties: propertyValues,

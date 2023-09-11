@@ -9,6 +9,7 @@
       },
       {
         "name": "cidrBlock",
+        "placeholder": "xxx.xxx.xxx.xxx/xx",
         "validTypes": ["string"],
         "isRequired": true
       }
@@ -26,11 +27,15 @@
       {
         "name": "cidrBlock",
         "validTypes": ["string"],
+        "placeholder": "xxx.xxx.xxx.xxx/xx",
         "isRequired": true
       },
       {
         "name": "public",
         "validTypes": ["boolean"],
+        "input": {
+          "type": "checkbox"
+        },
         "isRequired": true
       }
     ],
@@ -47,6 +52,7 @@
       {
         "name": "imageId",
         "validTypes": ["string"],
+        "placeholder": "ami-*",
         "isRequired": true
       },
       {
@@ -74,6 +80,13 @@
       {
         "name": "type",
         "validTypes": ["string"],
+        "input": {
+          "type": "select",
+          "options": [
+            { "value": "ingress", "label": "Ingress" },
+            { "value": "egress", "label": "Egress" }
+          ]
+        },
         "isRequired": true
       },
       {
@@ -94,6 +107,7 @@
       {
         "name": "cidrBlocks",
         "validTypes": ["string[]"],
+        "placeholder": "xxx.xxx.xxx.xxx/xx",
         "isRequired": true
       }
     ],
