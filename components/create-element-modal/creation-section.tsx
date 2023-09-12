@@ -94,7 +94,7 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
     }
 
     hierarchy.addContainer(hierarchy.selectedNode.id, {
-      name: propertyValues?.name ?? elementType,
+      name: properties?.name.toString() ?? elementType,
       element: {
         type: elementType,
         properties: properties,

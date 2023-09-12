@@ -6,6 +6,10 @@
         "label": "Ingress SSH",
         "properties": [
           {
+            "name": "name",
+            "value": "inbound-ssh"
+          },
+          {
             "name": "type",
             "value": "ingress"
           },
@@ -30,6 +34,10 @@
       {
         "label": "Ingress HTTP",
         "properties": [
+            {
+              "name": "name",
+              "value": "inbound-http"
+            },
             {
               "name": "type",
               "value": "ingress"
@@ -56,6 +64,10 @@
         "label": "Full outbound",
         "properties": [
           {
+            "name": "name",
+            "value": "full-outbound"
+          },
+          {
             "name": "type",
             "value": "egress"
           },
@@ -80,6 +92,10 @@
       {
         "label": "K8S worker node",
         "properties": [
+          {
+            "name": "name",
+            "value": "k8s-worker"
+          },
           {
             "name": "type",
             "value": "ingress"
