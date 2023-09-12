@@ -1,4 +1,5 @@
-import templates from '@/infra-elements/templates/default.json';
+import templates from '@/infra-elements/templates/aws.json';
+import examples from '@/infra-elements/templates/examples/aws.json';
 
 export function useTemplate(elementType: string) {
   const template = templates.find((template) => template.type === elementType);
@@ -23,4 +24,9 @@ export function useTemplate(elementType: string) {
     ...template,
     isAllRequiredFieldsFilled
   };
+}
+
+export function useExample(elementType: string) {
+  const example = examples.find(example => example.type === elementType)
+  return example?.templates ?? []
 }

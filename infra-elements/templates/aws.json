@@ -78,6 +78,11 @@
     "type": "SecurityGroupRule",
     "properties": [
       {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
         "name": "type",
         "validTypes": ["string"],
         "input": {

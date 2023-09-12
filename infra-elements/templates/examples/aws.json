@@ -1,0 +1,123 @@
+[
+  {
+    "type": "SecurityGroupRule",
+    "templates": [
+      {
+        "label": "Ingress SSH",
+        "properties": [
+          {
+            "name": "name",
+            "value": "inbound-ssh"
+          },
+          {
+            "name": "type",
+            "value": "ingress"
+          },
+          {
+            "name": "fromPort",
+            "value": 22
+          },
+          {
+            "name": "toPort",
+            "value": 22
+          },
+          {
+            "name": "protocol",
+            "value": "tcp"
+          },
+          {
+            "name": "cidrBlocks",
+            "value": ["0.0.0.0/0"]
+          }
+        ]
+      },
+      {
+        "label": "Ingress HTTP",
+        "properties": [
+            {
+              "name": "name",
+              "value": "inbound-http"
+            },
+            {
+              "name": "type",
+              "value": "ingress"
+            },
+            {
+              "name": "fromPort",
+              "value": 80
+            },
+            {
+              "name": "toPort",
+              "value": 80
+            },
+            {
+              "name": "protocol",
+              "value": "tcp"
+            },
+            {
+              "name": "cidrBlocks",
+              "value": ["0.0.0.0/0"]
+            }
+          ]
+      },
+      {
+        "label": "Full outbound",
+        "properties": [
+          {
+            "name": "name",
+            "value": "full-outbound"
+          },
+          {
+            "name": "type",
+            "value": "egress"
+          },
+          {
+            "name": "fromPort",
+            "value": 0
+          },
+          {
+            "name": "toPort",
+            "value": 0
+          },
+          {
+            "name": "protocol",
+            "value": "-1"
+          },
+          {
+            "name": "cidrBlocks",
+            "value": ["0.0.0.0/0"]
+          }
+        ]
+      },
+      {
+        "label": "K8S worker node",
+        "properties": [
+          {
+            "name": "name",
+            "value": "k8s-worker"
+          },
+          {
+            "name": "type",
+            "value": "ingress"
+          },
+          {
+            "name": "fromPort",
+            "value": 30000
+          },
+          {
+            "name": "toPort",
+            "value": 32767
+          },
+          {
+            "name": "protocol",
+            "value": "tcp"
+          },
+          {
+            "name": "cidrBlocks",
+            "value": ["0.0.0.0/0"]
+          }
+        ]
+      }
+    ]
+  }
+]

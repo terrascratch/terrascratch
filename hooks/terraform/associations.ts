@@ -42,23 +42,31 @@ function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
   }
 
   const vpc = root.findNode(node.parentId)?.element
-  const securityGroupRules = node.findChildren("SecurityGroupRule")
 
   return `resource "aws_security_group" "${securityGroup.properties.name}" {
   name        = "${securityGroup.properties.name}"
   description = "description"
   vpc_id      = aws_vpc.${vpc?.properties.name}.id
-  ${securityGroupRules?.map(rule => {
+
+  ${getSecurityGroupRulesCode(node)}
+}`
+}
+
+function getSecurityGroupRulesCode(node: TreeNode) {
+  const securityGroupRules = node.findChildren("SecurityGroupRule")
+  const securityGroupRulesString = securityGroupRules?.map(rule => {
     const { fromPort, toPort, protocol, cidrBlocks } = rule.element.properties
 
-    return `\n  ${rule.element.properties.type} {
+    return `${rule.element.properties.type} {
       from_port   = ${fromPort}
       to_port     = ${toPort}
       protocol    = "${protocol}"
       cidr_blocks = ${cidrBlocks}
-  }`
-  }) ?? ''}
-}`
+  }\n\n\
+  `
+  }) ?? ''
+
+  return securityGroupRulesString.join('').replace(/(\n[^\n]*){2}$/, '')
 }
 
 export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
