@@ -4,7 +4,9 @@ import { RenderTerraform } from "@/components/render-terraform";
 import { RenderTreeNode } from "@/components/render-tree-node";
 import { useHierarchy } from "@/contexts/hierarchy";
 import NextImage from "next/image";
+import Link from "next/link";
 import { ToastContainer } from "react-toastify";
+import { FaGithub } from "react-icons/fa";
 
 export default function Home() {
   const hierarchy = useHierarchy();
@@ -20,10 +22,10 @@ export default function Home() {
           priority
         />
 
-        <h1 className="text-2xl mt-3">Infra for Babies</h1>
+        <h1 className="text-2xl mt-3">Scratch IaC</h1>
       </header>
 
-      <p>Select your infraestructure elements and configure the hierarchy.</p>
+      <p>Learn Terraform by building your infrastructure from scratch.</p>
       <div className="mt-5 flex-1 flex items-start justify-center">
         <section className="flex-1 mr-5">
           <RenderTreeNode isRoot node={hierarchy.root} />
@@ -34,11 +36,23 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="text-slate-500 text-sm">
-        <a href="https://br.freepik.com/vetores-gratis/logotipo-detalhado-do-bebe_10806892.htm#query=baby%20logo&position=1&from_view=search&track=ais">
-          pikisuperstar&apos;s logo
-        </a>{" "}
-        from Freepik
+      <footer className="text-slate-500 text-sm flex items-center justify-center">
+        <span>
+          <a href="https://br.freepik.com/vetores-gratis/logotipo-detalhado-do-bebe_10806892.htm#query=baby%20logo&position=1&from_view=search&track=ais">
+            pikisuperstar&apos;s logo
+          </a>{" "}
+          from Freepik
+        </span>
+
+        <Link
+          href="https://github.com/scratch-iac/scratch-iac"
+          target="_blank"
+          className="ml-5 flex items-center justify-center bg-gray-500 rounded-lg text-white p-2"
+        >
+          <FaGithub />
+
+          <p className="ml-1">Join us</p>
+        </Link>
       </footer>
 
       <CreateElementModal />
