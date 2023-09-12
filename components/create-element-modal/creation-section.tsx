@@ -53,11 +53,9 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
         <Input
           property={property}
           onChange={(value) => {
-            const realValue = property.input?.type === 'checkbox' ? `${value === 'on'}` :  value
-
             setPropertyValues({
               ...propertyValues,
-              [property.name]: realValue,
+              [property.name]: value,
             })
           }
           }
@@ -67,11 +65,19 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
   });
 
   const examples = useExample(elementType).map(example => {
+    const escapeArray = (value: any, index: number, arr: any[]) => {
+      if (index === arr.length - 1) {
+        return `"${value}"`
+      }
+      return `"${value}", `
+    }
+
     return (
-      <button className="btn" key={example.label} onClick={() => {
+      <button className="transition ease-in-out bg-[#282A36] hover:bg-gray-600 text-white font-semibold text-sm/[14px] rounded-lg shadow pr-2.5 pl-2.5 py-2.5 px-2.5 mr-2 mb-2" key={example.label} onClick={() => {
         let props = {}
         example.properties.forEach(property => {
-          props = {...props, [property.name]: `${property.value}`}
+          const realValue = Array.isArray(property.value) ? `[${property.value.map(escapeArray)}]` : property.value
+          props = {...props, [property.name]: `${realValue}`}
         })
 
         addContainer(props)

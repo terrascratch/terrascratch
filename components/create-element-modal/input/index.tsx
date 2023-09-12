@@ -3,7 +3,7 @@ import { DefaultInput } from "./text-input";
 
 export interface InputProps {
   property: Property;
-  onChange?: (value: string) => void;
+  onChange?: (value: any) => void;
 }
 
 const getInputComponent = (inputType: string | undefined) => {
