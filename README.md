@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# scratch-iac
 
-## Getting Started
+some programming languages have interactive and visual tools for learning, such as [Python Tutor](https://pythontutor.com/) (which includes JavaScript, C/C++, and Java) and [Scratch](https://scratch.mit.edu/), which is our inspiration for the development of the project, but there is no tool like that for learning [infrastructure as code](https://www.redhat.com/en/topics/automation/what-is-infrastructure-as-code-iac) (IaC).
 
-First, run the development server:
+what are the common ways to learn IaC? video tutorials and documentation? **boooooring**. our playground transforms a graphical view of the infrastructure into [OpenTF](https://github.com/opentffoundation/opentf) code (formerly [Terraform](https://www.terraform.io/)), making it easier to read and understand the code and providing an interactive way to learn IaC, where you can build your infrastructure code from scratch.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## what do you need to know?
+
+ideally, you should have knowledge of the basics of cloud and computer networks. for example, you should known what is a network and a subnet, what is a firewall, what are sockets, etc. besides that, the only thing you need is creativity to build your infrastructure and see it as OpenTF.
+
+## how can i use this tool?
+
+the easiest way is accessing our [playground](https://scratch-iac.vercel.app/) and start scratching.
+
+the other way is cloning the project and adding your own super secret infrastructure templates, that's why you don't want to contribute publicly to the project :c
+
+### how i run the project locally?
+
+just choose a node package manager of your preference (bun, npm, yarn, pnpm, ...) and run:
+
+```sh
+npm install && npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+access `http://localhost:3000` and you are ready to go
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## supported components and cloud providers
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+the project is still a embryo so, for now, we only support AWS.
 
-## Learn More
+### [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
 
-To learn more about Next.js, take a look at the following resources:
+* EC2
+* Security Groups
+* VPC's
+* Subnets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### [GCP](https://cloud.google.com/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+...
 
-## Deploy on Vercel
+### [Hetzner](https://www.hetzner.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+...
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### [Oracle Cloud](https://www.oracle.com/)
+
+...
+
+## contributing
+
+the main way to contribute to our project is to develop templates that will be used by our parser for conversion into OpenTF code. to do this you need to:
+
+### global templates
+
+TODO
+
+### component templates
+
+TODO
+
+## license
+
+we follow MIT license. see on [LICENSE]('./LICENSE')
