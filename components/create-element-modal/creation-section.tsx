@@ -59,6 +59,7 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
             })
           }
           }
+          root={hierarchy.root}
         />
       </li>
     );
@@ -94,7 +95,7 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
     }
 
     hierarchy.addContainer(hierarchy.selectedNode.id, {
-      name: properties?.name.toString() ?? elementType,
+      name: properties?.name?.toString() ?? elementType,
       element: {
         type: elementType,
         properties: properties,
