@@ -1,5 +1,29 @@
 [
   {
+    "type": "Provider",
+    "properties": [
+      {
+        "name": "region",
+        "label": "Region",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "access_key",
+        "label": "Access Key",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "secret_key",
+        "label": "Secret Key",
+        "validTypes": ["string"],
+        "isRequired": true
+      }
+    ],
+    "childrenElementTypes": ["VPC"]
+  },
+  {
     "type": "VPC",
     "properties": [
       {
