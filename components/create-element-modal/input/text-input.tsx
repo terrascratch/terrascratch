@@ -6,9 +6,9 @@ export function DefaultInput({ property, onChange }: InputProps) {
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (property.input?.type === 'checkbox') {
-      onChange && onChange(event.currentTarget.checked)
+      onChange?.(event.currentTarget.checked)
     } else {
-      onChange && onChange(event.target.value)
+      onChange?.(event.target.value)
     }
   }
 

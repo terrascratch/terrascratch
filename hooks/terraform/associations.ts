@@ -14,6 +14,57 @@ function getSubnetCode(node: TreeNode, root: TreeNode) {
 }`
 }
 
+function getIGWCode(node: TreeNode, root: TreeNode) {
+  const igw = node.element
+  if (node.parentId === null) {
+    throw Error()
+  }
+
+  const vpc = root.findNode(node.parentId)?.element
+  return `resource "aws_internet_gateway" "${igw.properties.name}" {
+  vpc_id = aws_vpc.${vpc?.properties.name}.id
+}`
+}
+
+function getRouteTableCode(node: TreeNode, root: TreeNode) {
+  const routeTable = node.element
+  const vpc = root.findNode(root.id)?.element
+  const routeBlocks = node.findChildren("Route Table Rule")
+  if (node.parentId === null) {
+    throw new Error()
+  }
+
+  const subnet = root.findNode(node.parentId)?.element.properties.name.toString()
+  if (subnet === undefined) {
+    throw new Error()
+  }
+
+  return `resource "aws_route_table" "${routeTable.properties.name}" {
+  vpc_id = aws_vpc.${vpc?.properties.name}.id
+  ${routeBlocks.map(n => getRouteTableRuleCode(n, root))}
+}\n
+${getRouteTableAssociationCode(subnet, routeTable.properties.name.toString())}`
+}
+
+function getRouteTableRuleCode(node: TreeNode, root: TreeNode) {
+  const routeTableRule = node.element
+  if (node.parentId === null) {
+    throw new Error()
+  }
+
+  return `\n  route {
+    cidr_block = ${routeTableRule.properties.cidrBlock}
+    gateway_id = aws_internet_gateway.${routeTableRule.properties.gateway}.id
+  }`
+}
+
+function getRouteTableAssociationCode(subnet: string, routeTable: string) {
+  return `resource "aws_route_table_association" "sub-${subnet}-rt-${routeTable}" {
+    subnet_id      = aws_subnet.${subnet}.id
+    route_table_id = aws_route_table.${routeTable}.id
+}`
+}
+
 function getVPCCode(node: TreeNode) {
   const vpc = node.element
   return `resource "aws_vpc" "${vpc.properties.name}" {
@@ -53,7 +104,7 @@ function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
 }
 
 function getSecurityGroupRulesCode(node: TreeNode) {
-  const securityGroupRules = node.findChildren("SecurityGroupRule")
+  const securityGroupRules = node.findChildren("Security Group Rule")
   const securityGroupRulesString = securityGroupRules?.map(rule => {
     const { fromPort, toPort, protocol, cidrBlocks } = rule.element.properties
 
@@ -77,8 +128,12 @@ export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
       return getVPCCode(fromElement)
     case "EC2":
       return getEC2Code(fromElement, root)
-    case "SecurityGroup":
+    case "Security Group":
       return getSecurityGroupCode(fromElement, root)
+    case "Internet Gateway":
+      return getIGWCode(fromElement, root)
+    case "Route Table":
+      return getRouteTableCode(fromElement, root)
     default:
       return ""
   }
