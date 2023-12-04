@@ -1,0 +1,9 @@
+{
+  "VPC": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+  "Subnet": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet",
+  "EC2": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
+  "Internet Gateway": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway",
+  "Route Table": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table",
+  "Security Group": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+  "Security Group Rule": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule"
+}
