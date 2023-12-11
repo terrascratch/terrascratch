@@ -1,6 +1,6 @@
 "use client";
-import { TreeNode } from "@/data-structures/tree";
 import { useHierarchy } from "@/contexts/hierarchy";
+import { TreeNode } from "@/data-structures/tree";
 import { useTemplate } from "@/hooks/template";
 
 function ShowNodeDetails({ node }: { node: TreeNode }) {
@@ -57,21 +57,21 @@ export function RenderTreeNode({ node, isRoot }: RenderTreeNodeProps) {
       <div className="flex items-center">
         {template.childrenElementTypes.length > 0 && (
           <button
-            className="rounded-md bg-gray-800 p-3 max-w-xs mt-3 mr-3"
+            className="rounded-md bg-green-800 p-2 max-w-xs mt-3 mr-3"
             type="button"
             onClick={onAdd}
           >
-            Add
+            <b>+ new resource</b>
           </button>
         )}
 
         {!isRoot && (
           <button
-            className="rounded-md bg-gray-800 p-3 max-w-xs mt-3"
+            className="rounded-md bg-red-800 p-2 max-w-xs mt-3"
             type="button"
             onClick={onDelete}
           >
-            Delete
+            <b>delete</b>
           </button>
         )}
       </div>

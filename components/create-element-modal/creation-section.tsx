@@ -1,7 +1,8 @@
 import { useHierarchy } from "@/contexts/hierarchy";
-import { useExample, useTemplate } from "@/hooks/template";
+import { useExample, useHelp, useTemplate } from "@/hooks/template";
 import { InfraElement, PropertyValue } from "@/infra-elements/types";
 import { useState } from "react";
+import { IoMdHelpCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 import { Input } from "./input";
 
@@ -12,16 +13,20 @@ interface AvailableElementsProps {
 
 function AvailableElements(props: AvailableElementsProps) {
   const template = useTemplate(props.parentElement.type);
+  const help = useHelp(template.childrenElementTypes)
 
-  const childTypeButtons = template.childrenElementTypes.map((type) => {
+  const childTypeButtons = help.map(({type, help}) => {
     return (
       <li key={type}>
-        <button
-          className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
-          onClick={() => props.onSelect(type)}
-        >
-          {type}
-        </button>
+        <div className="flex items-center">
+          <button
+            className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
+            onClick={() => props.onSelect(type)}
+          >
+            {type}
+          </button>
+          {help && <a href={help} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>}
+        </div>
       </li>
     );
   });
