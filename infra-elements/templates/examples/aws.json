@@ -1,13 +1,13 @@
 [
   {
-    "type": "SecurityGroupRule",
+    "type": "Security Group Rule",
     "templates": [
       {
         "label": "Ingress SSH",
         "properties": [
           {
             "name": "name",
-            "value": "inbound-ssh"
+            "value": "inbound_ssh"
           },
           {
             "name": "type",
@@ -27,7 +27,7 @@
           },
           {
             "name": "cidrBlocks",
-            "value": ["0.0.0.0/0"]
+            "value": "0.0.0.0/0"
           }
         ]
       },
@@ -36,7 +36,7 @@
         "properties": [
             {
               "name": "name",
-              "value": "inbound-http"
+              "value": "inbound_http"
             },
             {
               "name": "type",
@@ -56,7 +56,7 @@
             },
             {
               "name": "cidrBlocks",
-              "value": ["0.0.0.0/0"]
+              "value": "0.0.0.0/0"
             }
           ]
       },
@@ -65,7 +65,7 @@
         "properties": [
           {
             "name": "name",
-            "value": "full-outbound"
+            "value": "full_outbound"
           },
           {
             "name": "type",
@@ -85,7 +85,7 @@
           },
           {
             "name": "cidrBlocks",
-            "value": ["0.0.0.0/0"]
+            "value": "0.0.0.0/0"
           }
         ]
       },
@@ -94,7 +94,7 @@
         "properties": [
           {
             "name": "name",
-            "value": "k8s-worker"
+            "value": "k8s_worker"
           },
           {
             "name": "type",
@@ -114,7 +114,7 @@
           },
           {
             "name": "cidrBlocks",
-            "value": ["0.0.0.0/0"]
+            "value": "0.0.0.0/0"
           }
         ]
       }
