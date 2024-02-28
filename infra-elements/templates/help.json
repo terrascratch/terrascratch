@@ -1,9 +1,30 @@
 {
-  "VPC": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
-  "Subnet": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet",
-  "EC2": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
-  "Internet Gateway": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway",
-  "Route Table": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table",
-  "Security Group": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
-  "Security Group Rule": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule"
+  "VPC": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+    "help": "AWS provides the user with a logically isolated section of its network, with public or private groupings called subnets. For an instance to be accessible from the internet, it needs to be associated with a VPC."
+  },
+  "Subnet": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet",
+    "help": "Documentação sobre Virtual Private Cloud"
+  },
+  "EC2": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
+    "help": "It's the computing service. That is, it represents a virtual machine - or a dedicated physical server - that is managed by AWS. The provider takes care of the virtualization processes for you."
+  },
+  "Internet Gateway": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway",
+    "help": "It's a virtual device provided by AWS that allows a public subnet within a VPC to be accessible via the internet. In everyday analogy, it functions like the home routers provided by internet service providers."
+  },
+  "Route Table": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table",
+    "help": "Documentação sobre Route Table"
+  },
+  "Security Group": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+    "help": "In terms of inbound and outbound traffic on EC2 instances, the feature that dictates these rules is the Security Group, which is a virtual firewall provided by AWS."
+  },
+  "Security Group Rule": {
+    "link": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule",
+    "help": "Documentação sobre Security Group Rule"
+  }
 }

@@ -3,6 +3,11 @@ import examples from "@/infra-elements/templates/examples/aws.json";
 import help from "@/infra-elements/templates/help.json";
 import { ElementTemplate } from "@/infra-elements/templates/type";
 
+interface Help {
+  link: string
+  help: string
+}
+
 export function useTemplate(elementType: string) {
   const template: ElementTemplate | undefined = templates.find(
     (template) => template.type === elementType
@@ -37,7 +42,7 @@ export function useHelp(elementTypes: string[]) {
   return elementTypes.map(type => {
     return {
       type: type,
-      help: (help as Record<string, string>)[type]
+      help: (help as Record<string, Help>)[type]
     }
   })
 }
