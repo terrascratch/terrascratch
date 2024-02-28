@@ -53,7 +53,7 @@ function getRouteTableRuleCode(node: TreeNode, root: TreeNode) {
   }
 
   return `\n  route {
-    cidr_block = ${routeTableRule.properties.cidrBlock}
+    cidr_block = "${routeTableRule.properties.cidrBlock}"
     gateway_id = aws_internet_gateway.${routeTableRule.properties.gateway}.id
   }`
 }
@@ -112,7 +112,7 @@ function getSecurityGroupRulesCode(node: TreeNode) {
       from_port   = ${fromPort}
       to_port     = ${toPort}
       protocol    = "${protocol}"
-      cidr_blocks = ${cidrBlocks}
+      cidr_blocks = ["${cidrBlocks}"]
   }\n\n\
   `
   }) ?? ''
