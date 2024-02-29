@@ -1,4 +1,4 @@
-# scratch-iac
+# terrascratch
 
 some programming languages have interactive and visual tools for learning, such as [Python Tutor](https://pythontutor.com/) (which includes JavaScript, C/C++, and Java) and [Scratch](https://scratch.mit.edu/), which is our inspiration for the development of the project, but there is no tool like that for learning [infrastructure as code](https://www.redhat.com/en/topics/automation/what-is-infrastructure-as-code-iac) (IaC).
 
@@ -10,7 +10,7 @@ ideally, you should have knowledge of the basics of cloud and computer networks.
 
 ## how can i use this tool?
 
-the easiest way is accessing our [playground](https://scratch-iac.vercel.app/) and start scratching.
+the easiest way is accessing our [playground](https://terrascratch.vercel.app/) and start scratching.
 
 the other way is cloning the project and adding your own super secret infrastructure templates, that's why you don't want to contribute publicly to the project :c
 

@@ -137,6 +137,15 @@
       {
         "name": "imageId",
         "validTypes": ["string"],
+        "input": {
+          "type": "select",
+          "options": [
+            { "value": "ami-dasd", "label": "Ubuntu 22.04" },
+            { "value": "ami-dasd", "label": "Ubuntu 20.04" },
+            { "value": "ami-dasd", "label": "Amazon Linux" },
+            { "value": "ami-dasd", "label": "CentOS" }
+          ]
+        },
         "placeholder": "ami-*",
         "isRequired": true
       },

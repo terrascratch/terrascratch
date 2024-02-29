@@ -22,7 +22,7 @@ export default function Home() {
           priority
         />
 
-        <h1 className="text-2xl mt-3">Scratch IaC</h1>
+        <h1 className="text-2xl mt-3">Terrascratch</h1>
       </header>
 
       <p>Learn Terraform by building your infrastructure from scratch.</p>
@@ -45,7 +45,7 @@ export default function Home() {
         </span>
 
         <Link
-          href="https://github.com/scratch-iac/scratch-iac"
+          href="https://github.com/terrascratch/terrascratch"
           target="_blank"
           className="ml-5 flex items-center justify-center bg-gray-500 rounded-lg text-white p-2"
         >
