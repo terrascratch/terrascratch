@@ -25,7 +25,7 @@ function AvailableElements(props: AvailableElementsProps) {
           >
             {type}
           </button>
-          {help && <a href={help} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>}
+          {help && <a href={help.link} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>}
         </div>
       </li>
     );

@@ -10,7 +10,7 @@ function getSubnetCode(node: TreeNode, root: TreeNode) {
   return `resource "aws_subnet" "${subnet.properties.name}" {
   vpc_id                  = aws_vpc.${vpc?.properties.name}.id
   cidr_block              = "${subnet.properties.cidrBlock}"
-  map_public_ip_on_launch = ${subnet.properties.public}
+  map_public_ip_on_launch = ${!!subnet.properties.public}
 }`
 }
 
