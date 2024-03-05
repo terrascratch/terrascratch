@@ -26,7 +26,7 @@
             "value": "tcp"
           },
           {
-            "name": "cidrBlocks",
+            "name": "cidr_blocks",
             "value": "0.0.0.0/0"
           }
         ]
@@ -55,7 +55,7 @@
               "value": "tcp"
             },
             {
-              "name": "cidrBlocks",
+              "name": "cidr_blocks",
               "value": "0.0.0.0/0"
             }
           ]
@@ -84,7 +84,7 @@
             "value": "-1"
           },
           {
-            "name": "cidrBlocks",
+            "name": "cidr_blocks",
             "value": "0.0.0.0/0"
           }
         ]
@@ -113,7 +113,7 @@
             "value": "tcp"
           },
           {
-            "name": "cidrBlocks",
+            "name": "cidr_blocks",
             "value": "0.0.0.0/0"
           }
         ]
