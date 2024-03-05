@@ -10,7 +10,7 @@ function getSubnetCode(node: TreeNode, root: TreeNode) {
 
   const subnetCode =  `resource "aws_subnet" "${subnet.properties.name}" {
   vpc_id                  = aws_vpc.${vpc?.properties.name}.id
-  cidr_block              = "${subnet.properties.cidrBlock}"
+  cidr_block              = "${subnet.properties.cidr_block}"
   map_public_ip_on_launch = ${!!subnet.properties.public}
 }
   `
@@ -69,7 +69,7 @@ function getRouteTableAssociationCode(subnet: string, routeTable: string) {
 function getVPCCode(node: TreeNode) {
   const vpc = node.element
   return `resource "aws_vpc" "${vpc.properties.name}" {
-  cidr_block = "${vpc.properties.cidrBlock}"
+  cidr_block = "${vpc.properties.cidr_block}"
 }`
 }
 
@@ -107,13 +107,13 @@ function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
 function getSecurityGroupRulesCode(node: TreeNode) {
   const securityGroupRules = node.findChildren("Security Group Rule")
   const securityGroupRulesString = securityGroupRules?.map(rule => {
-    const { fromPort, toPort, protocol, cidrBlocks } = rule.element.properties
+    const { fromPort, toPort, protocol, cidr_blocks } = rule.element.properties
 
     return `${rule.element.properties.type} {
       from_port   = ${fromPort}
       to_port     = ${toPort}
       protocol    = "${protocol}"
-      cidr_blocks = ["${cidrBlocks}"]
+      cidr_blocks = ["${cidr_blocks}"]
   }\n\n\
   `
   }) ?? ''
