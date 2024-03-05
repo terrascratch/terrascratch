@@ -1,4 +1,5 @@
 import { TreeNode } from "@/data-structures/tree";
+import { PublicRouteTableBlock } from "./types";
 
 function getSubnetCode(node: TreeNode, root: TreeNode) {
   const subnet = node.element
@@ -7,11 +8,17 @@ function getSubnetCode(node: TreeNode, root: TreeNode) {
   }
   const vpc = root.findNode(node.parentId)?.element
 
-  return `resource "aws_subnet" "${subnet.properties.name}" {
+  const subnetCode =  `resource "aws_subnet" "${subnet.properties.name}" {
   vpc_id                  = aws_vpc.${vpc?.properties.name}.id
   cidr_block              = "${subnet.properties.cidrBlock}"
   map_public_ip_on_launch = ${!!subnet.properties.public}
-}`
+}
+  `
+
+  const igwCode = getIGWCode(node, root)
+  const routeTableCode = getRouteTableCode(node, root, [{ igwName: node.name, cidrBlock: "0.0.0.0/0"}])
+
+  return `${subnetCode}${!!subnet.properties.public && '\n' + igwCode + '\n\n' + routeTableCode || ''}`
 }
 
 function getIGWCode(node: TreeNode, root: TreeNode) {
@@ -26,10 +33,9 @@ function getIGWCode(node: TreeNode, root: TreeNode) {
 }`
 }
 
-function getRouteTableCode(node: TreeNode, root: TreeNode) {
+function getRouteTableCode(node: TreeNode, root: TreeNode, routeBlocks: PublicRouteTableBlock[] = []) {
   const routeTable = node.element
   const vpc = root.findNode(root.id)?.element
-  const routeBlocks = node.findChildren("Route Table Rule")
   if (node.parentId === null) {
     throw new Error()
   }
@@ -41,27 +47,22 @@ function getRouteTableCode(node: TreeNode, root: TreeNode) {
 
   return `resource "aws_route_table" "${routeTable.properties.name}" {
   vpc_id = aws_vpc.${vpc?.properties.name}.id
-  ${routeBlocks.map(n => getRouteTableRuleCode(n, root))}
+  ${routeBlocks.map(n => getRouteTableRuleCode(n.cidrBlock, n.igwName))}
 }\n
 ${getRouteTableAssociationCode(subnet, routeTable.properties.name.toString())}`
 }
 
-function getRouteTableRuleCode(node: TreeNode, root: TreeNode) {
-  const routeTableRule = node.element
-  if (node.parentId === null) {
-    throw new Error()
-  }
-
+function getRouteTableRuleCode(cidrBlock: string, gateway: string) {
   return `\n  route {
-    cidr_block = "${routeTableRule.properties.cidrBlock}"
-    gateway_id = aws_internet_gateway.${routeTableRule.properties.gateway}.id
+    cidr_block = "${cidrBlock}"
+    gateway_id = aws_internet_gateway.${gateway}.id
   }`
 }
 
 function getRouteTableAssociationCode(subnet: string, routeTable: string) {
   return `resource "aws_route_table_association" "sub-${subnet}-rt-${routeTable}" {
-    subnet_id      = aws_subnet.${subnet}.id
-    route_table_id = aws_route_table.${routeTable}.id
+  subnet_id      = aws_subnet.${subnet}.id
+  route_table_id = aws_route_table.${routeTable}.id
 }`
 }
 
@@ -130,10 +131,6 @@ export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
       return getEC2Code(fromElement, root)
     case "Security Group":
       return getSecurityGroupCode(fromElement, root)
-    case "Internet Gateway":
-      return getIGWCode(fromElement, root)
-    case "Route Table":
-      return getRouteTableCode(fromElement, root)
     default:
       return ""
   }

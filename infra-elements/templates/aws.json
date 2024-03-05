@@ -42,18 +42,7 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["Subnet", "Security Group", "Internet Gateway"]
-  },
-  {
-    "type": "Internet Gateway",
-    "properties": [
-      {
-        "name": "name",
-        "validTypes": ["string"],
-        "isRequired": true
-      }
-    ],
-    "childrenElementTypes": []
+    "childrenElementTypes": ["Subnet", "Security Group"]
   },
   {
     "type": "Subnet",
@@ -82,49 +71,7 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["EC2", "Route Table"]
-  },
-  {
-    "type": "Route Table",
-    "properties": [
-      {
-        "name": "name",
-        "validTypes": ["string"],
-        "isRequired": true
-      }
-    ],
-    "childrenElementTypes": ["Route Table Rule"]
-  },
-  {
-    "type": "Route Table Rule",
-    "properties": [
-      {
-        "name": "cidrBlock",
-        "label": "CIDR Block",
-        "validTypes": ["string"],
-        "input": {
-          "type": "text",
-          "validator": "ipv4"
-        },
-        "isRequired": true
-      },
-      {
-        "name": "gateway",
-        "label": "Gateway",
-        "validTypes": ["string"],
-        "input": {
-          "type": "resource",
-          "options": [
-            {
-              "value": "Internet Gateway",
-              "label": "Internet Gateway"
-            }
-          ]
-        },
-        "isRequired": true
-      }
-    ],
-    "childrenElementTypes": []
+    "childrenElementTypes": ["EC2"]
   },
   {
     "type": "EC2",
