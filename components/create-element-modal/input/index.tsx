@@ -13,6 +13,8 @@ const getInputComponent = (inputType: string | undefined) => {
   switch(inputType) {
     case "resource":
       return ResourceInput
+    case "multi-resource":
+      return ResourceInput
     default:
       return DefaultInput
   }

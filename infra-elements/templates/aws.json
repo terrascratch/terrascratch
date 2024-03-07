@@ -100,6 +100,17 @@
         "name": "instance_type",
         "validTypes": ["string"],
         "isRequired": true
+      },
+      {
+        "name": "vpc_security_group_ids",
+        "validTypes": ["string[]"],
+        "input": {
+          "type": "multi-resource",
+          "options": [
+            { "label": "Security Group", "value": "Security Group" }
+          ]
+        },
+        "isRequired": false
       }
     ],
     "childrenElementTypes": []

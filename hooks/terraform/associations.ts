@@ -81,8 +81,8 @@ function getEC2Code(node: TreeNode, root: TreeNode) {
   const subnet = root.findNode(node.parentId)?.element
 
   return `resource "aws_instance" "${ec2.properties.name}" {
-  ami           = "${ec2.properties.imageId}"
-  instance_type = "${ec2.properties.instanceType}"
+  ami           = "${ec2.properties.ami}"
+  instance_type = "${ec2.properties.instance_type}"
   subnet_id     = aws_subnet.${subnet?.properties.name}.id
 }`
 }
