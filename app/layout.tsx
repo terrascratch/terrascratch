@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
-  title: "Infra for Babies",
+  title: "Terrascratch",
   description:
     "Easy-to-use dashboard where you can build your terraform code like playing with lego blocks.",
 };

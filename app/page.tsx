@@ -16,7 +16,7 @@ export default function Home() {
       <header className="flex flex-col items-center justify-center">
         <NextImage
           src="/logo.png"
-          alt="Infra for babies"
+          alt="Terrascratch"
           width={100}
           height={100}
           priority
