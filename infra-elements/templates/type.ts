@@ -16,10 +16,17 @@ export interface Property {
   label?: string;
   input?: InputTemplate;
   placeholder?: string;
+  description?: string;
+}
+
+export interface Help {
+  documentationLink: string;
+  description: string
 }
 
 export interface ElementTemplate {
   type: string;
+  help?: Help;
   properties: Property[];
   childrenElementTypes: string[];
 }

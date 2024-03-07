@@ -25,6 +25,10 @@
   },
   {
     "type": "VPC",
+    "help": {
+      "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
+      "description": "AWS provides the user with a logically isolated section of its network, with public or private groupings called subnets. For an instance to be accessible from the internet, it needs to be associated with a VPC."
+    },
     "properties": [
       {
         "name": "name",
@@ -35,17 +39,18 @@
         "name": "cidr_block",
         "placeholder": "xxx.xxx.xxx.xxx/xx",
         "validTypes": ["string"],
-        "input": {
-          "type": "text",
-          "validator": "ipv4"
-        },
-        "isRequired": true
+        "isRequired": true,
+        "description": "The CIDR block of the VPC."
       }
     ],
     "childrenElementTypes": ["Subnet", "Security Group"]
   },
   {
     "type": "Subnet",
+    "help": {
+      "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet",
+      "description": ""
+    },
     "properties": [
       {
         "name": "name",
@@ -55,12 +60,9 @@
       {
         "name": "cidr_block",
         "validTypes": ["string"],
-        "input": {
-          "type": "text",
-          "validator": "ipv4"
-        },
         "placeholder": "xxx.xxx.xxx.xxx/xx",
-        "isRequired": true
+        "isRequired": true,
+        "description": "The IPv4 CIDR block of the subnet. Must be in the VPC CIDR."
       },
       {
         "name": "public",
@@ -68,13 +70,18 @@
         "input": {
           "type": "checkbox"
         },
-        "isRequired": true
+        "isRequired": true,
+        "description": "If the subnet must be public or private. A public subnet means that the Internet can access the machines in the subnet, which means that AWS must provision an Internet Gateway and associate it with the VPC."
       }
     ],
     "childrenElementTypes": ["EC2"]
   },
   {
     "type": "EC2",
+    "help": {
+      "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
+      "description": "It's the computing service. That is, it represents a virtual machine - or a dedicated physical server - that is managed by AWS. The provider takes care of the virtualization for you."
+    },
     "properties": [
       {
         "name": "name",
@@ -94,12 +101,14 @@
           ]
         },
         "placeholder": "ami-*",
-        "isRequired": true
+        "isRequired": true,
+        "description": "Acronym for Amazon Machine Image. It's the code of the image that will be used by the instance, eg.: Ubuntu 22.04, Amazon Linux, etc."
       },
       {
         "name": "instance_type",
         "validTypes": ["string"],
-        "isRequired": true
+        "isRequired": true,
+        "description": "This attribute will define the hardware of the instance, such as the number of CPUs, the amount of memory, and the network performance."
       },
       {
         "name": "vpc_security_group_ids",
@@ -110,13 +119,18 @@
             { "label": "Security Group", "value": "Security Group" }
           ]
         },
-        "isRequired": false
+        "isRequired": false,
+        "description": "The Security Group(s) that the instance must be attached."
       }
     ],
     "childrenElementTypes": []
   },
   {
     "type": "Security Group",
+    "help": {
+      "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
+      "description": "In terms of inbound and outbound traffic on EC2 instances, the feature that dictates these rules is the Security Group, which is a virtual firewall provided by AWS."
+    },
     "properties": [
       {
         "name": "name",
@@ -128,6 +142,10 @@
   },
   {
     "type": "Security Group Rule",
+    "help": {
+      "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule",
+      "description": "The Security Group Rule is a rule that dictates the inbound and outbound traffic on EC2 instances. It is a virtual firewall provided by AWS."
+    },
     "properties": [
       {
         "name": "name",
@@ -144,32 +162,33 @@
             { "value": "egress", "label": "Egress" }
           ]
         },
-        "isRequired": true
+        "isRequired": true,
+        "description": "Ingress defines the inbound traffic, while Egress defines the outbound traffic."
       },
       {
         "name": "protocol",
         "validTypes": ["string"],
-        "isRequired": true
+        "isRequired": true,
+        "description": "TCP, UDP, or ICMP. If all, set '-1'."
       },
       {
         "name": "from_port",
         "validTypes": ["number"],
-        "isRequired": true
+        "isRequired": true,
+        "description": "From which port this rule will be applied to."
       },
       {
         "name": "to_port",
         "validTypes": ["number"],
-        "isRequired": true
+        "isRequired": true,
+        "description": "To which port this rule will be applied to."
       },
       {
         "name": "cidr_blocks",
         "validTypes": ["string[]"],
         "placeholder": "xxx.xxx.xxx.xxx/xx",
-        "input": {
-          "type": "text",
-          "validator": "ipv4"
-        },
-        "isRequired": true
+        "isRequired": true,
+        "description": "CIDR blocks that this rule will be applied to. If all, set '0.0.0.0/0'."
       }
     ],
     "childrenElementTypes": []
