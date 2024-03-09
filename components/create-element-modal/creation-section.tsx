@@ -1,5 +1,5 @@
 import { useHierarchy } from "@/contexts/hierarchy";
-import { useExample, useHelp, useTemplate } from "@/hooks/template";
+import { useExample, useTemplate } from "@/hooks/template";
 import { InfraElement, PropertyValue } from "@/infra-elements/types";
 import { useState } from "react";
 import { IoMdHelpCircleOutline } from "react-icons/io";
@@ -11,24 +11,50 @@ interface AvailableElementsProps {
   onSelect: (elementType: string) => void;
 }
 
+interface HelpButtonProps {
+  documentationLink: string
+  description: string
+}
+
+function HelpButton(props: HelpButtonProps) {
+  const [hover, setHover] = useState(false)
+
+  const onMouseEnter = () => setHover(true)
+  const onMouseLeave = () => setHover(false)
+
+  console.log(hover)
+
+  // pq o hover nao ta funcionando? @davigsousa
+  return (
+    <div
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {hover ?? <p>{props.description}</p>}
+      <a href={props.documentationLink} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>
+    </div>
+  )
+}
+
 function AvailableElements(props: AvailableElementsProps) {
   const template = useTemplate(props.parentElement.type);
-  const help = useHelp(template.childrenElementTypes)
 
-  const childTypeButtons = help.map(({type, help}) => {
-    return (
-      <li key={type}>
-        <div className="flex items-center">
-          <button
-            className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
-            onClick={() => props.onSelect(type)}
-          >
-            {type}
-          </button>
-          {help && <a href={help.link} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>}
-        </div>
-      </li>
-    );
+  const childTypeButtons = template.childrenElementTemplates.map(child => {
+    if (child) {
+      return (
+        <li key={child.type}>
+          <div className="flex items-center">
+            <button
+              className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
+              onClick={() => props.onSelect(child.type)}
+            >
+              {child.type}
+            </button>
+            {child.help && <HelpButton documentationLink={child.help.documentationLink} description={child.help.description}/>}
+          </div>
+        </li>
+      );
+    }
   });
 
   return (
