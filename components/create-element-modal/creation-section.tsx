@@ -30,8 +30,6 @@ function HelpButton(props: HelpButtonProps) {
   const onMouseEnter = () => setHover(true)
   const onMouseLeave = () => setHover(false)
 
-  console.log(hover)
-
   return (
     <div
       onMouseEnter={onMouseEnter}

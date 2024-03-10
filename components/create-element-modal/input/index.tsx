@@ -1,5 +1,5 @@
 import { TreeNode } from "@/data-structures/tree";
-import { Property } from "@/infra-elements/templates/type";
+import { Help, Property } from "@/infra-elements/templates/type";
 import { ResourceInput } from "./resource-input";
 import { DefaultInput } from "./text-input";
 
@@ -37,7 +37,7 @@ export function Input({ property, onChange, root }: InputProps) {
 
   return (
     <div className="flex flex-col items-start justify-center mt-3">
-      <p>{label}</p>
+      <b>{label}</b>
 
       <InputComponent property={property} onChange={onChange} root={root} />
     </div>
