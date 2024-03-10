@@ -12,8 +12,16 @@ interface AvailableElementsProps {
 }
 
 interface HelpButtonProps {
-  documentationLink: string
-  description: string
+  documentationLink?: string
+  description?: string
+}
+
+function HelpDescription({ description }: HelpButtonProps) {
+  return (
+    <div>
+      <p>{description}</p>
+    </div>
+  )
 }
 
 function HelpButton(props: HelpButtonProps) {
@@ -24,13 +32,12 @@ function HelpButton(props: HelpButtonProps) {
 
   console.log(hover)
 
-  // pq o hover nao ta funcionando? @davigsousa
   return (
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {hover ?? <p>{props.description}</p>}
+      {hover && <HelpDescription description={props.description}/>}
       <a href={props.documentationLink} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>
     </div>
   )
