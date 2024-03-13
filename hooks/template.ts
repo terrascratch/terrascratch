@@ -3,9 +3,9 @@ import examples from "@/infra-elements/templates/examples/aws.json";
 import help from "@/infra-elements/templates/help.json";
 import { ElementTemplate } from "@/infra-elements/templates/type";
 
-interface Help {
-  link: string
-  help: string
+export interface Help {
+  link: string;
+  help: string;
 }
 
 export function useTemplate(elementType: string) {
@@ -39,10 +39,10 @@ export function useExample(elementType: string) {
 }
 
 export function useHelp(elementTypes: string[]) {
-  return elementTypes.map(type => {
+  return elementTypes.map((type) => {
     return {
       type: type,
-      help: (help as Record<string, Help>)[type]
-    }
-  })
+      help: (help as Record<string, Help>)[type],
+    };
+  });
 }

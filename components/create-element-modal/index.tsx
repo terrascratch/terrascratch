@@ -1,6 +1,5 @@
 import { useHierarchy } from "@/contexts/hierarchy";
 import { CreationSection } from "./creation-section";
-import { useState } from "react";
 
 export function CreateElementModal() {
   const hierarchy = useHierarchy();
