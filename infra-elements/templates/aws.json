@@ -61,6 +61,15 @@
         "name": "cidr_block",
         "validTypes": ["string"],
         "placeholder": "192.168.0.0/24",
+        "input": {
+          "type": "select",
+          "options": [
+            { "value": "192.168.0.0/24", "label": "192.168.0.0/24"},
+            { "value": "192.168.1.0/24", "label": "192.168.1.0/24"},
+            { "value": "192.168.2.0/24", "label": "192.168.2.0/24"},
+            { "value": "192.168.3.0/24", "label": "192.168.3.0/24"}
+          ]
+        },
         "isRequired": true,
         "description": "The IPv4 CIDR block of the subnet. Must be in the VPC CIDR."
       },
@@ -94,10 +103,8 @@
         "input": {
           "type": "select",
           "options": [
-            { "value": "ami-dasd", "label": "Ubuntu 22.04" },
-            { "value": "ami-dasd", "label": "Ubuntu 20.04" },
-            { "value": "ami-dasd", "label": "Amazon Linux" },
-            { "value": "ami-dasd", "label": "CentOS" }
+            { "value": "ami-080e1f13689e07408", "label": "Ubuntu 22.04" },
+            { "value": "ami-0f8b8f874036055b1", "label": "Ubuntu 20.04" }
           ]
         },
         "placeholder": "ami-*",
@@ -107,6 +114,15 @@
       {
         "name": "instance_type",
         "validTypes": ["string"],
+        "input": {
+          "type": "select",
+          "options": [
+            { "value": "t2.micro", "label": "t2.micro" },
+            { "value": "t2.small", "label": "t2.small" },
+            { "value": "t2.medium", "label": "t2.medium" },
+            { "value": "t2.large", "label": "t2.large" }
+          ]
+        },
         "isRequired": true,
         "description": "This attribute will define the hardware of the instance, such as the number of CPUs, the amount of memory, and the network performance."
       },

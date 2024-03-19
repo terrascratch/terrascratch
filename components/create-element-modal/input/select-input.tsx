@@ -24,13 +24,14 @@ export function SelectInput({ property, options, onChange }: InputProps) {
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,
-          backgroundColor: 'black',
-          color: 'white'
+          backgroundColor: '#212121',
+          color: 'white',
+          opacity: 0.75
         }),
         option: (baseStyles, state) => ({
           ...baseStyles,
-          backgroundColor: state.isFocused ? 'white' : 'black',
-          color: state.isFocused ? 'black' : 'white',
+          backgroundColor: state.isFocused ? '#212121' : 'white',
+          color: state.isFocused ? 'white' : '#212121',
         }),
         singleValue: (baseStyles, state) => ({
           ...baseStyles,
