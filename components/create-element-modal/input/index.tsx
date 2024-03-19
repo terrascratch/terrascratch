@@ -1,12 +1,18 @@
 import { TreeNode } from "@/data-structures/tree";
-import { Help, Property } from "@/infra-elements/templates/type";
+import { Property } from "@/infra-elements/templates/type";
 import { ResourceInput } from "./resource-input";
 import { DefaultInput } from "./text-input";
+import { SelectInput } from "./select-input";
 
+interface Option {
+  label: string
+  value: string
+}
 export interface InputProps {
   property: Property;
-  onChange?: (value: any) => void;
+  onChange: (value: any) => void;
   root?: TreeNode;
+  options?: Option[]
 }
 
 const getInputComponent = (inputType: string | undefined) => {
@@ -15,6 +21,8 @@ const getInputComponent = (inputType: string | undefined) => {
       return ResourceInput;
     case "multi-resource":
       return ResourceInput;
+    case "select":
+      return SelectInput
     default:
       return DefaultInput;
   }
@@ -40,7 +48,7 @@ export function Input({ property, onChange, root }: InputProps) {
       <p className="text-slate">{label}</p>
       <p className="text-xs text-slate-500 mt-1">{property.description}</p>
 
-      <InputComponent property={property} onChange={onChange} root={root} />
+      <InputComponent property={property} options={property.input?.options} onChange={onChange} root={root} />
     </div>
   );
 }
