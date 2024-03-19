@@ -8,35 +8,43 @@ export function SelectInput({ options, onChange }: InputProps) {
   }
 
   return (
-    <Select
-      className='basic-single'
-      onChange={(e) => onChange(e?.value)}
-      options={options}
-      theme={theme => ({
-        ...theme,
-        colors: {
-          ...theme.colors,
-          primary: 'white',
-          primary25: 'white'
-        }
-      })}
-      styles={{
-        control: (baseStyles, state) => ({
-          ...baseStyles,
-          backgroundColor: '#212121',
-          color: 'white',
-          opacity: 0.75
-        }),
-        option: (baseStyles, state) => ({
-          ...baseStyles,
-          backgroundColor: state.isFocused ? '#212121' : 'white',
-          color: state.isFocused ? 'white' : '#212121',
-        }),
-        singleValue: (baseStyles, state) => ({
-          ...baseStyles,
-          color: 'white'
-        })
-      }}
-    />
+    <div className='w-56'>
+      <Select
+        className='basic-single'
+        onChange={(e) => onChange(e?.value)}
+        options={options}
+        theme={theme => ({
+          ...theme,
+          borderRadius: 4,
+          colors: {
+            ...theme.colors,
+            primary: '#1F2937',
+            primary25: 'white',
+          },
+          spacing: {
+            ...theme.spacing,
+            baseUnit: 4
+          }
+        })}
+        styles={{
+          control: (baseStyles, state) => ({
+            ...baseStyles,
+            backgroundColor: '#1F2937',
+            color: 'white',
+            opacity: 0.75
+          }),
+          option: (baseStyles, state) => ({
+            ...baseStyles,
+            backgroundColor: state.isFocused ? 'white' : '#1F2937',
+            color: state.isFocused ? '#1F2937' : 'white',
+          }),
+          singleValue: (baseStyles, state) => ({
+            ...baseStyles,
+            color: 'white'
+          })
+        }}
+      />
+    </div>
+
   )
 }
