@@ -79,7 +79,6 @@
         "input": {
           "type": "checkbox"
         },
-        "isRequired": true,
         "description": "If the subnet must be public or private. A public subnet means that the Internet can access the machines in the subnet, which means that AWS must provision an Internet Gateway and associate it with the VPC."
       }
     ],

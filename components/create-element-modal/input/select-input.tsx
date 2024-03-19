@@ -1,4 +1,5 @@
 import Select from 'react-select';
+import { useEffect } from 'react';
 import { InputProps } from '.';
 
 
@@ -6,6 +7,10 @@ export function SelectInput({ options, onChange }: InputProps) {
   if (!options) {
     throw new Error('Select input must have options');
   }
+
+  useEffect(() => {
+    onChange(options[0].value);
+  }, [])
 
   return (
     <Select
