@@ -60,7 +60,7 @@
       {
         "name": "cidr_block",
         "validTypes": ["string"],
-        "placeholder": "xxx.xxx.xxx.xxx/xx",
+        "placeholder": "192.168.0.0/24",
         "isRequired": true,
         "description": "The IPv4 CIDR block of the subnet. Must be in the VPC CIDR."
       },
