@@ -147,7 +147,16 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
     hierarchy.setSelectedNode(null);
   };
 
+  const allRequiredFieldsFilled = () => {
+    return template.properties.filter((property) => property.isRequired && !propertyValues[property.name]).length === 0
+  }
+
   const onCreate = () => {
+    if (!allRequiredFieldsFilled()) {
+      const requiredFieldsNotFilled = template.properties.filter((property) => property.isRequired && !propertyValues[property.name]).map(property => property.name).join(', ');
+      toast.error(`You must fill all required fields: ${requiredFieldsNotFilled}`);
+      return;
+    }
     addContainer(propertyValues);
   };
 
