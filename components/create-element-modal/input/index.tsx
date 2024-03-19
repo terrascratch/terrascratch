@@ -1,5 +1,5 @@
 import { TreeNode } from "@/data-structures/tree";
-import { Property } from "@/infra-elements/templates/type";
+import { Help, Property } from "@/infra-elements/templates/type";
 import { ResourceInput } from "./resource-input";
 import { DefaultInput } from "./text-input";
 

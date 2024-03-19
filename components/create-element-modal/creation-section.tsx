@@ -1,5 +1,5 @@
 import { useHierarchy } from "@/contexts/hierarchy";
-import { Help, useExample, useHelp, useTemplate } from "@/hooks/template";
+import { useExample, useTemplate } from "@/hooks/template";
 import { InfraElement, PropertyValue } from "@/infra-elements/types";
 import { useEffect, useState } from "react";
 import { IoMdHelpCircleOutline } from "react-icons/io";
@@ -11,48 +11,56 @@ interface AvailableElementsProps {
   onSelect: (elementType: string) => void;
 }
 
+interface HelpButtonProps {
+  documentationLink?: string
+  description?: string
+}
+
+function HelpDescription({ description }: HelpButtonProps) {
+  return (
+    <div className="absolute bg-gray-600 p-3 rounded-md text-white text-sm z-10 left-[40px]">
+      {description}
+    </div>
+  )
+}
+
+function HelpButton(props: HelpButtonProps) {
+  const [hover, setHover] = useState(false)
+
+  const onMouseEnter = () => setHover(true)
+  const onMouseLeave = () => setHover(false)
+
+  return (
+    <div
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {hover && <HelpDescription description={props.description}/>}
+      <a href={props.documentationLink} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>
+    </div>
+  )
+}
+
 function AvailableElements(props: AvailableElementsProps) {
   const template = useTemplate(props.parentElement.type);
-  const help = useHelp(template.childrenElementTypes);
 
-  const ChildTypeButton = ({ type, help }: { type: string; help: Help }) => {
-    const [isHovered, setIsHovered] = useState(false);
-
-    return (
-      <li>
-        <div className="flex items-center">
-          <button
-            className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
-            onClick={() => props.onSelect(type)}
-          >
-            {type}
-          </button>
-
-          {help && (
-            <a
-              href={help.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+  const childTypeButtons = template.childrenElementTemplates.map(child => {
+    if (child) {
+      return (
+        <li key={child.type}>
+          <div className="flex items-center">
+            <button
+              className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
+              onClick={() => props.onSelect(child.type)}
             >
-              <IoMdHelpCircleOutline />
-
-              {isHovered && (
-                <div className="absolute bg-gray-600 p-3 rounded-md text-white text-sm z-10 left-[40px]">
-                  {help.help}
-                </div>
-              )}
-            </a>
-          )}
-        </div>
-      </li>
-    );
-  };
-
-  const childTypeButtons = help.map(({ type, help }) => (
-    <ChildTypeButton key={type} type={type} help={help} />
-  ));
+              {child.type}
+            </button>
+            {child.help && <HelpButton documentationLink={child.help.documentationLink} description={child.help.description}/>}
+          </div>
+        </li>
+      );
+    }
+  });
 
   return (
     <section>
