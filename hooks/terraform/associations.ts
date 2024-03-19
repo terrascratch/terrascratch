@@ -74,11 +74,13 @@ function getEC2Code(node: TreeNode, root: TreeNode) {
     throw Error()
   }
   const subnet = root.findNode(node.parentId)?.element
+  const vpcSecurityGroupIdsCode =  ec2.properties.vpc_security_group_ids ? `vpc_security_group_ids = [aws_security_group.${ec2.properties.vpc_security_group_ids}.id]` : ''
 
   return `resource "aws_instance" "${ec2.properties.name}" {
-  ami           = "${ec2.properties.ami}"
-  instance_type = "${ec2.properties.instance_type}"
-  subnet_id     = aws_subnet.${subnet?.properties.name}.id
+  ami                    = "${ec2.properties.ami}"
+  instance_type          = "${ec2.properties.instance_type}"
+  subnet_id              = aws_subnet.${subnet?.properties.name}.id
+  ${vpcSecurityGroupIdsCode}
 }`
 }
 

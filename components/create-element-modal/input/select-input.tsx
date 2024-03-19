@@ -1,5 +1,4 @@
 import Select from 'react-select';
-import { useEffect } from 'react';
 import { InputProps } from '.';
 
 
@@ -8,15 +7,10 @@ export function SelectInput({ options, onChange }: InputProps) {
     throw new Error('Select input must have options');
   }
 
-  useEffect(() => {
-    onChange(options[0].value);
-  }, [])
-
   return (
     <Select
       className='basic-single'
       onChange={(e) => onChange(e?.value)}
-      defaultValue={options[0]}
       options={options}
       theme={theme => ({
         ...theme,
