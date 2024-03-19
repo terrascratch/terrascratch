@@ -6,26 +6,26 @@ import { DefaultInput } from "./text-input";
 export interface InputProps {
   property: Property;
   onChange?: (value: any) => void;
-  root?: TreeNode
+  root?: TreeNode;
 }
 
 const getInputComponent = (inputType: string | undefined) => {
-  switch(inputType) {
+  switch (inputType) {
     case "resource":
-      return ResourceInput
+      return ResourceInput;
     case "multi-resource":
-      return ResourceInput
+      return ResourceInput;
     default:
-      return DefaultInput
+      return DefaultInput;
   }
-//  switch(inputType) {
-//    TODO
-//    case "multi-select":
-//      return MultiSelectInput
-//    case "select":
-//      return SimpleSelect
-//    default:
-}
+  //  switch(inputType) {
+  //    TODO
+  //    case "multi-select":
+  //      return MultiSelectInput
+  //    case "select":
+  //      return SimpleSelect
+  //    default:
+};
 
 export function Input({ property, onChange, root }: InputProps) {
   let label = property.name;
@@ -33,11 +33,12 @@ export function Input({ property, onChange, root }: InputProps) {
     label += " *";
   }
 
-  const InputComponent = getInputComponent(property.input?.type)
+  const InputComponent = getInputComponent(property.input?.type);
 
   return (
     <div className="flex flex-col items-start justify-center mt-3">
-      <b>{label}</b>
+      <p className="text-slate">{label}</p>
+      <p className="text-xs text-slate-500 mt-1">{property.description}</p>
 
       <InputComponent property={property} onChange={onChange} root={root} />
     </div>

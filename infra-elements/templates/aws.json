@@ -37,7 +37,7 @@
       },
       {
         "name": "cidr_block",
-        "placeholder": "xxx.xxx.xxx.xxx/xx",
+        "placeholder": "192.168.0.0/24",
         "validTypes": ["string"],
         "isRequired": true,
         "description": "The CIDR block of the VPC."

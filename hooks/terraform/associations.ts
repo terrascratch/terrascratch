@@ -22,34 +22,29 @@ function getSubnetCode(node: TreeNode, root: TreeNode) {
 }
 
 function getIGWCode(node: TreeNode, root: TreeNode) {
-  const igw = node.element
+  const subnet = node.element
   if (node.parentId === null) {
     throw Error()
   }
 
   const vpc = root.findNode(node.parentId)?.element
-  return `resource "aws_internet_gateway" "${igw.properties.name}" {
+  return `resource "aws_internet_gateway" "${subnet.properties.name}" {
   vpc_id = aws_vpc.${vpc?.properties.name}.id
 }`
 }
 
 function getRouteTableCode(node: TreeNode, root: TreeNode, routeBlocks: PublicRouteTableBlock[] = []) {
-  const routeTable = node.element
+  const subnet = node.element
   const vpc = root.findNode(root.id)?.element
   if (node.parentId === null) {
     throw new Error()
   }
 
-  const subnet = root.findNode(node.parentId)?.element.properties.name.toString()
-  if (subnet === undefined) {
-    throw new Error()
-  }
-
-  return `resource "aws_route_table" "${routeTable.properties.name}" {
+  return `resource "aws_route_table" "${subnet.properties.name}" {
   vpc_id = aws_vpc.${vpc?.properties.name}.id
   ${routeBlocks.map(n => getRouteTableRuleCode(n.cidrBlock, n.igwName))}
 }\n
-${getRouteTableAssociationCode(subnet, routeTable.properties.name.toString())}`
+${getRouteTableAssociationCode(subnet.properties.name.toString())}`
 }
 
 function getRouteTableRuleCode(cidrBlock: string, gateway: string) {
@@ -59,10 +54,10 @@ function getRouteTableRuleCode(cidrBlock: string, gateway: string) {
   }`
 }
 
-function getRouteTableAssociationCode(subnet: string, routeTable: string) {
-  return `resource "aws_route_table_association" "sub-${subnet}-rt-${routeTable}" {
-  subnet_id      = aws_subnet.${subnet}.id
-  route_table_id = aws_route_table.${routeTable}.id
+function getRouteTableAssociationCode(subnetName: string) {
+  return `resource "aws_route_table_association" "sub-${subnetName}-rt-${subnetName}" {
+  subnet_id      = aws_subnet.${subnetName}.id
+  route_table_id = aws_route_table.${subnetName}.id
 }`
 }
 

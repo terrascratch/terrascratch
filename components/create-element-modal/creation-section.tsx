@@ -1,7 +1,7 @@
 import { useHierarchy } from "@/contexts/hierarchy";
 import { useExample, useTemplate } from "@/hooks/template";
 import { InfraElement, PropertyValue } from "@/infra-elements/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 import { Input } from "./input";
@@ -18,8 +18,8 @@ interface HelpButtonProps {
 
 function HelpDescription({ description }: HelpButtonProps) {
   return (
-    <div>
-      <p>{description}</p>
+    <div className="absolute bg-gray-600 p-3 rounded-md text-white text-sm z-10 left-[40px]">
+      {description}
     </div>
   )
 }
@@ -92,37 +92,42 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
             setPropertyValues({
               ...propertyValues,
               [property.name]: value,
-            })
-          }
-          }
+            });
+          }}
           root={hierarchy.root}
         />
       </li>
     );
   });
 
-  const examples = useExample(elementType).map(example => {
+  const examples = useExample(elementType).map((example) => {
     const escapeArray = (value: any, index: number, arr: any[]) => {
       if (index === arr.length - 1) {
-        return `"${value}"`
+        return `"${value}"`;
       }
-      return `"${value}", `
-    }
+      return `"${value}", `;
+    };
 
     return (
-      <button className="transition ease-in-out bg-[#282A36] hover:bg-gray-600 text-white font-semibold text-sm/[14px] rounded-lg shadow pr-2.5 pl-2.5 py-2.5 px-2.5 mr-2 mb-2" key={example.label} onClick={() => {
-        let props = {}
-        example.properties.forEach(property => {
-          const realValue = Array.isArray(property.value) ? `[${property.value.map(escapeArray)}]` : property.value
-          props = {...props, [property.name]: `${realValue}`}
-        })
+      <button
+        className="transition ease-in-out bg-[#282A36] hover:bg-gray-600 text-white font-semibold text-sm/[14px] rounded-lg shadow pr-2.5 pl-2.5 py-2.5 px-2.5 mr-2 mb-2"
+        key={example.label}
+        onClick={() => {
+          let props = {};
+          example.properties.forEach((property) => {
+            const realValue = Array.isArray(property.value)
+              ? `[${property.value.map(escapeArray)}]`
+              : property.value;
+            props = { ...props, [property.name]: `${realValue}` };
+          });
 
-        addContainer(props)
-      }}>
+          addContainer(props);
+        }}
+      >
         {example.label}
       </button>
-    )
-  })
+    );
+  });
 
   const addContainer = (properties: { [key: string]: PropertyValue }) => {
     if (hierarchy.selectedNode === null) {
@@ -137,20 +142,18 @@ function ElementCreationSetup({ elementType }: ElementCreationSetupProps) {
         properties: properties,
       },
       children: [],
-      parentId: hierarchy.selectedNode.id
+      parentId: hierarchy.selectedNode.id,
     });
     hierarchy.setSelectedNode(null);
-  }
+  };
 
   const onCreate = () => {
-    addContainer(propertyValues)
+    addContainer(propertyValues);
   };
 
   return (
     <section className="w-full flex flex-col">
-      <div>
-        {examples}
-      </div>
+      <div>{examples}</div>
       <h3>Fill the properties of the new {elementType}</h3>
 
       <ul>{inputs}</ul>
