@@ -27,6 +27,6 @@ export function ResourceInput({ property, onChange, root }: InputProps) {
   }
 
   return (
-    <SelectInput onChange={handleOnChange} options={availableResources} />
+    <SelectInput property={property} onChange={handleOnChange} options={availableResources} />
   )
 }

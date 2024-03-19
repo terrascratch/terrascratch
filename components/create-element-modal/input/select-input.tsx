@@ -2,7 +2,7 @@ import Select from 'react-select';
 import { InputProps } from '.';
 
 
-export function SelectInput({ property, options, onChange }: InputProps) {
+export function SelectInput({ options, onChange }: InputProps) {
   if (!options) {
     throw new Error('Select input must have options');
   }
