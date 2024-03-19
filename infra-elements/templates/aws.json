@@ -185,6 +185,15 @@
         "name": "protocol",
         "validTypes": ["string"],
         "isRequired": true,
+        "input": {
+          "type": "select",
+          "options": [
+            { "value": "tcp", "label": "TCP" },
+            { "value": "udp", "label": "UDP" },
+            { "value": "icmp", "label": "ICMP" },
+            { "value": "-1", "label": "All" }
+          ]
+        },
         "description": "TCP, UDP, or ICMP. If all, set '-1'."
       },
       {

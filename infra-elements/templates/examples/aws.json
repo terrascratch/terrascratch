@@ -14,11 +14,11 @@
             "value": "ingress"
           },
           {
-            "name": "fromPort",
+            "name": "from_port",
             "value": 22
           },
           {
-            "name": "toPort",
+            "name": "to_port",
             "value": 22
           },
           {
@@ -43,11 +43,11 @@
               "value": "ingress"
             },
             {
-              "name": "fromPort",
+              "name": "from_port",
               "value": 80
             },
             {
-              "name": "toPort",
+              "name": "to_port",
               "value": 80
             },
             {
@@ -72,11 +72,11 @@
             "value": "egress"
           },
           {
-            "name": "fromPort",
+            "name": "from_port",
             "value": 0
           },
           {
-            "name": "toPort",
+            "name": "to_port",
             "value": 0
           },
           {
@@ -101,11 +101,11 @@
             "value": "ingress"
           },
           {
-            "name": "fromPort",
+            "name": "from_port",
             "value": 30000
           },
           {
-            "name": "toPort",
+            "name": "to_port",
             "value": 32767
           },
           {

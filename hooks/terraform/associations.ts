@@ -102,11 +102,11 @@ function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
 function getSecurityGroupRulesCode(node: TreeNode) {
   const securityGroupRules = node.findChildren("Security Group Rule")
   const securityGroupRulesString = securityGroupRules?.map(rule => {
-    const { fromPort, toPort, protocol, cidr_blocks } = rule.element.properties
+    const { from_port, to_port, protocol, cidr_blocks } = rule.element.properties
 
     return `${rule.element.properties.type} {
-      from_port   = ${fromPort}
-      to_port     = ${toPort}
+      from_port   = ${from_port}
+      to_port     = ${to_port}
       protocol    = "${protocol}"
       cidr_blocks = ["${cidr_blocks}"]
   }\n\n\
