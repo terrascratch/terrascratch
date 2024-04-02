@@ -8,7 +8,7 @@ export function DefaultInput({ property, onChange }: InputProps) {
     if (property.input?.type === 'checkbox') {
       onChange?.(event.currentTarget.checked)
     } else {
-      onChange?.(event.target.value)
+      onChange?.(event.target.value.trim())
     }
   }
 
@@ -19,7 +19,9 @@ export function DefaultInput({ property, onChange }: InputProps) {
         type={property.input?.type ?? 'text'}
         placeholder={property.placeholder ?? defaultPlaceholder}
         onChange={handleOnChange}
-    />
+        pattern="^[a-zA-Z0-9]+$"
+        maxLength={32}
+      />
     </div>
   )
 }
