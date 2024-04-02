@@ -1,10 +1,11 @@
 import { useHierarchy } from "@/contexts/hierarchy";
 import { useExample, useTemplate } from "@/hooks/template";
 import { InfraElement, PropertyValue } from "@/infra-elements/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 import { Input } from "./input";
+import { Tooltip } from "react-tooltip"
 
 interface AvailableElementsProps {
   parentElement: InfraElement;
@@ -12,50 +13,54 @@ interface AvailableElementsProps {
 }
 
 interface HelpButtonProps {
+  index: number
   documentationLink?: string
   description?: string
 }
 
-function HelpDescription({ description }: HelpButtonProps) {
-  return (
-    <div className="absolute bg-gray-600 p-3 rounded-md text-white text-sm z-10 left-[40px]">
-      {description}
-    </div>
-  )
-}
 
 function HelpButton(props: HelpButtonProps) {
-  const [hover, setHover] = useState(false)
-
-  const onMouseEnter = () => setHover(true)
-  const onMouseLeave = () => setHover(false)
-
   return (
-    <div
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      {hover && <HelpDescription description={props.description}/>}
-      <a href={props.documentationLink} target="_blank" rel="noopener noreferrer"><IoMdHelpCircleOutline /></a>
-    </div>
+    <>
+      <a
+        id={`help-${props.index}`}
+        href={props.documentationLink}
+        target="_blank"
+        rel="noopener noreferrer"><IoMdHelpCircleOutline />
+      </a>
+
+      <Tooltip
+        className="absolute bg-gray-600 p-3 rounded-md text-white text-sm z-10 left-[40px]"
+        anchorSelect={`#help-${props.index}`}
+        clickable
+        place="top-start"
+        style={{
+          backgroundColor: "#4B5563",
+          width: "fit-content",
+          fontSize: "14px"
+        }}
+      >
+        {props.description}
+      </Tooltip>
+    </>
   )
 }
 
 function AvailableElements(props: AvailableElementsProps) {
   const template = useTemplate(props.parentElement.type);
 
-  const childTypeButtons = template.childrenElementTemplates.map(child => {
+  const childTypeButtons = template.childrenElementTemplates.map((child, index) => {
     if (child) {
       return (
         <li key={child.type}>
           <div className="flex items-center">
             <button
-              className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3"
+              className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3 transition hover:bg-gray-600 shadow"
               onClick={() => props.onSelect(child.type)}
             >
               {child.type}
             </button>
-            {child.help && <HelpButton documentationLink={child.help.documentationLink} description={child.help.description}/>}
+            {child.help && <HelpButton index={index} documentationLink={child.help.documentationLink} description={child.help.description}/>}
           </div>
         </li>
       );
