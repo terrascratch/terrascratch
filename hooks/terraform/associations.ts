@@ -1,5 +1,6 @@
 import { TreeNode } from "@/data-structures/tree";
 import { PublicRouteTableBlock } from "./types";
+import { breakLine } from "@/util";
 
 function getSubnetCode(node: TreeNode, root: TreeNode) {
   const subnet = node.element
@@ -75,12 +76,14 @@ function getEC2Code(node: TreeNode, root: TreeNode) {
   }
   const subnet = root.findNode(node.parentId)?.element
   const vpcSecurityGroupIdsCode =  ec2.properties.vpc_security_group_ids ? `vpc_security_group_ids = [aws_security_group.${ec2.properties.vpc_security_group_ids}.id]` : ''
+  const keyNameCode = ec2.properties.key_name ? `key_name = aws_key_pair.${ec2.properties.key_name}.key_name` : ''
 
   return `resource "aws_instance" "${ec2.properties.name}" {
   ami                    = "${ec2.properties.ami}"
   instance_type          = "${ec2.properties.instance_type}"
   subnet_id              = aws_subnet.${subnet?.properties.name}.id
   ${vpcSecurityGroupIdsCode}
+  ${keyNameCode}
 }`
 }
 
@@ -118,6 +121,16 @@ function getSecurityGroupRulesCode(node: TreeNode) {
   return securityGroupRulesString.join('').replace(/(\n[^\n]*){2}$/, '')
 }
 
+function getKeyPairCode(node: TreeNode) {
+  const keyPair = node.element
+  return `resource "aws_key_pair" "${keyPair.properties.name}" {
+  key_name   = "${keyPair.properties.name}"
+  public_key = <<EOF
+${breakLine(keyPair.properties.public_key.toString())}
+EOF
+}`
+}
+
 export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
   switch (fromElement.element.type) {
     case "Subnet":
@@ -128,6 +141,8 @@ export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
       return getEC2Code(fromElement, root)
     case "Security Group":
       return getSecurityGroupCode(fromElement, root)
+    case "Key Pair":
+      return getKeyPairCode(fromElement)
     default:
       return ""
   }

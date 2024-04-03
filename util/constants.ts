@@ -1,5 +1,6 @@
 const VPC_NAME = "VPC"
 const SUBNET_NAME = "Subnet"
+const BIG_TEXT_BREAK_POINT = 50
 
-export { SUBNET_NAME, VPC_NAME }
+export { SUBNET_NAME, VPC_NAME, BIG_TEXT_BREAK_POINT }
 

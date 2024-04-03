@@ -3,6 +3,8 @@ import { InputProps } from ".";
 
 export function DefaultInput({ property, onChange }: InputProps) {
   const defaultPlaceholder = property.validTypes.join(" | ");
+  const bigText = property.input?.type === "big-text";
+  const maxLength = bigText ? 1024 : 32
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (property.input?.type === 'checkbox') {
@@ -20,7 +22,7 @@ export function DefaultInput({ property, onChange }: InputProps) {
         placeholder={property.placeholder ?? defaultPlaceholder}
         onChange={handleOnChange}
         pattern="^[a-zA-Z0-9]+$"
-        maxLength={32}
+        maxLength={maxLength}
       />
     </div>
   )

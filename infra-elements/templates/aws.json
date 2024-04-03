@@ -43,7 +43,7 @@
         "description": "The CIDR block of the VPC."
       }
     ],
-    "childrenElementTypes": ["Subnet", "Security Group"]
+    "childrenElementTypes": ["Subnet", "Security Group", "Key Pair"]
   },
   {
     "type": "Subnet",
@@ -137,6 +137,18 @@
         },
         "isRequired": false,
         "description": "The Security Group(s) that the instance must be attached."
+      },
+      {
+        "name": "key_name",
+        "validTypes": ["string"],
+        "input": {
+          "type": "resource",
+          "options": [
+            { "label": "Key Pair", "value": "Key Pair" }
+          ]
+        },
+        "isRequired": false,
+        "description": "The aws_key_pair resource that will be used to access the instance."
       }
     ],
     "childrenElementTypes": []
@@ -214,6 +226,30 @@
         "placeholder": "xxx.xxx.xxx.xxx/xx",
         "isRequired": true,
         "description": "CIDR blocks that this rule will be applied to. If all, set '0.0.0.0/0'."
+      }
+    ],
+    "childrenElementTypes": []
+  },
+  {
+    "type": "Key Pair",
+    "help": {
+      "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair",
+      "description": "The Key Pair is a pair of keys that will be used to access the instance. The public key will be stored in the instance, while the private key will be used by the user to access the instance."
+    },
+    "properties": [
+      {
+        "name": "name",
+        "validTypes": ["string"],
+        "isRequired": true
+      },
+      {
+        "name": "public_key",
+        "validTypes": ["string"],
+        "isRequired": true,
+        "input": {
+          "type": "big-text"
+        },
+        "description": "The public key that will be used to access an instance."
       }
     ],
     "childrenElementTypes": []
