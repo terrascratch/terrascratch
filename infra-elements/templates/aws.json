@@ -21,13 +21,14 @@
         "isRequired": true
       }
     ],
-    "childrenElementTypes": ["VPC"]
+    "childrenElementTypes": ["aws_vpc"]
   },
   {
-    "type": "VPC",
+    "type": "aws_vpc",
     "help": {
+      "alias": "VPC",
       "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc",
-      "description": "AWS provides the user with a logically isolated section of its network, with public or private groupings called subnets. For an instance to be accessible from the internet, it needs to be associated with a VPC."
+      "description": "AWS provides the user with a logically isolated section of its network, called Virtual Private Cloud (or VPC), with public or private groupings called subnets. For an instance to be accessible from the internet, it needs to be associated with a VPC."
     },
     "properties": [
       {
@@ -43,11 +44,12 @@
         "description": "The CIDR block of the VPC."
       }
     ],
-    "childrenElementTypes": ["Subnet", "Security Group", "Key Pair"]
+    "childrenElementTypes": ["aws_subnet", "aws_security_group", "aws_key_pair"]
   },
   {
-    "type": "Subnet",
+    "type": "aws_subnet",
     "help": {
+      "alias": "Subnet",
       "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet",
       "description": "A subnet is a range of IP addresses in your VPC. You can launch AWS resources into a specified subnet. Use a public subnet for resources that must be connected to the internet, and a private subnet for resources that won't be connected to the internet."
     },
@@ -83,13 +85,14 @@
         "description": "If the subnet must be public or private. A public subnet means that the Internet can access the machines in the subnet, which means that AWS must provision an Internet Gateway and associate it with the VPC."
       }
     ],
-    "childrenElementTypes": ["EC2"]
+    "childrenElementTypes": ["aws_instance"]
   },
   {
-    "type": "EC2",
+    "type": "aws_instance",
     "help": {
+      "alias": "EC2",
       "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance",
-      "description": "It's the computing service. That is, it represents a virtual machine - or a dedicated physical server - that is managed by AWS. The provider takes care of the virtualization for you."
+      "description": "It's the computing service, called Elastic Compute Cloud (or EC2). That is, it represents a virtual machine - or a dedicated physical server - that is managed by AWS. The provider takes care of the virtualization for you."
     },
     "properties": [
       {
@@ -154,7 +157,7 @@
     "childrenElementTypes": []
   },
   {
-    "type": "Security Group",
+    "type": "aws_security_group",
     "help": {
       "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group",
       "description": "In terms of inbound and outbound traffic on EC2 instances, the feature that dictates these rules is the Security Group, which is a virtual firewall provided by AWS."
@@ -231,8 +234,9 @@
     "childrenElementTypes": []
   },
   {
-    "type": "Key Pair",
+    "type": "aws_key_pair",
     "help": {
+      "alias": "SSH Key Pair",
       "documentationLink": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair",
       "description": "The Key Pair is a pair of keys that will be used to access the instance. The public key will be stored in the instance, while the private key will be used by the user to access the instance."
     },

@@ -58,7 +58,7 @@ function AvailableElements(props: AvailableElementsProps) {
               className="rounded-md bg-gray-700 p-3 max-w-xs mt-3 mr-3 transition hover:bg-gray-600 shadow"
               onClick={() => props.onSelect(child.type)}
             >
-              {child.type}
+              {`${child.type}${child.help?.alias ? ' - ' + child.help.alias: ''}`.trim()}
             </button>
             {child.help && <HelpButton index={index} documentationLink={child.help.documentationLink} description={child.help.description}/>}
           </div>

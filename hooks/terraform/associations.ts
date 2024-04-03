@@ -133,15 +133,15 @@ EOF
 
 export function getTerraformCode(fromElement: TreeNode, root: TreeNode) {
   switch (fromElement.element.type) {
-    case "Subnet":
+    case "aws_subnet":
       return getSubnetCode(fromElement, root)
-    case "VPC":
+    case "aws_vpc":
       return getVPCCode(fromElement)
-    case "EC2":
+    case "aws_instance":
       return getEC2Code(fromElement, root)
-    case "Security Group":
+    case "aws_security_group":
       return getSecurityGroupCode(fromElement, root)
-    case "Key Pair":
+    case "aws_key_pair":
       return getKeyPairCode(fromElement)
     default:
       return ""
