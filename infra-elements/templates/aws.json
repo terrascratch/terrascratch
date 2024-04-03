@@ -135,7 +135,7 @@
         "input": {
           "type": "multi-resource",
           "options": [
-            { "label": "Security Group", "value": "Security Group" }
+            { "label": "Security Group", "value": "aws_security_group" }
           ]
         },
         "isRequired": false,
@@ -147,7 +147,7 @@
         "input": {
           "type": "resource",
           "options": [
-            { "label": "Key Pair", "value": "Key Pair" }
+            { "label": "Key Pair", "value": "aws_key_pair" }
           ]
         },
         "isRequired": false,
