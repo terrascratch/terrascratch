@@ -20,6 +20,7 @@ export interface Property {
 }
 
 export interface Help {
+  alias?: string
   documentationLink: string;
   description: string
 }

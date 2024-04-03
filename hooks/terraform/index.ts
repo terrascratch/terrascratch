@@ -11,7 +11,7 @@ export function useTerraform(root: TreeNode) {
 }';
 
   const addNodeCode = (node: TreeNode) => {
-    initialCodeString += '\n\n' + getTerraformCode(node, root)
+    initialCodeString += '\n\n' + getTerraformCode(node, root).trim()
 
     for (const current of node.children) {
       addNodeCode(current)

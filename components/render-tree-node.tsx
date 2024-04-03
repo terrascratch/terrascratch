@@ -2,15 +2,18 @@
 import { useHierarchy } from "@/contexts/hierarchy";
 import { TreeNode } from "@/data-structures/tree";
 import { useTemplate } from "@/hooks/template";
+import { breakLine } from "@/util";
 
 function ShowNodeDetails({ node }: { node: TreeNode }) {
   const properties = Object.entries(node.element.properties).filter(
     ([key]) => key !== "name"
   );
   const propertiesInfos = properties.map(([key, value]) => {
+    const parsedValue = String(value).length > 100 ? breakLine(String(value)) : String(value);
+
     return (
       <div key={key}>
-        <span className="font-bold">{key}</span>: {String(value)}
+        <span className="font-bold">{key}</span>: {parsedValue}
       </div>
     );
   });
