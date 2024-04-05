@@ -20,5 +20,5 @@ export function useTerraform(root: TreeNode) {
 
   addNodeCode(root)
 
-  return initialCodeString
+  return initialCodeString.replace(/\n{3,}/g, '\n\n')
 }

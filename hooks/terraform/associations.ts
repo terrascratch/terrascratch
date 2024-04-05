@@ -94,13 +94,14 @@ function getSecurityGroupCode(node: TreeNode, root: TreeNode) {
   }
 
   const vpc = root.findNode(node.parentId)?.element
+  const hasRules = node.findChildren('Security Group Rule').length > 0
+  const securityGroupRulesCode = getSecurityGroupRulesCode(node)
 
   return `resource "aws_security_group" "${securityGroup.properties.name}" {
   name        = "${securityGroup.properties.name}"
   description = "description"
   vpc_id      = aws_vpc.${vpc?.properties.name}.id
-
-  ${getSecurityGroupRulesCode(node)}
+  ${hasRules ? '\n  ' + securityGroupRulesCode : ''}
 }`
 }
 
